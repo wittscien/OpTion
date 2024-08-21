@@ -5,7 +5,7 @@
 
 [OpTion](https://github.com/wittscien/OpTion) (Operator construcTion) is a Mathematica package for operator construction in lattice QCD.
 
-# Installation
+## Installation
 
 There is a Test.nb file under the repository Tests and it can run directly. To install the package,
 
@@ -23,16 +23,16 @@ To load the package, simply run
 <<OpTion`
 ```
 
-# Documentation
+## Documentation
 
 Please see [Manual/OpTion_manual.pdf](https://github.com/wittscien/OpTion/blob/main/Manual/OpTion_manual.pdf) in the repository.
 
-# Acknowledging OpTion
+## Acknowledging OpTion
 
 Please acknowledge our work when you use OpTion in your research by citing the following paper where the construction method is described:
 
 * Haobo Yan *et al*, in preparation, [arXiv:2408.xxxx](https://arxiv.org/abs/2408.xxxx).
 
-# Contact
+## Contact
 
 For questions or comments, please contact [Haobo Yan](haobo@stu.pku.edu.cn) or find him in person at either the office or more likely, a badminton court.
