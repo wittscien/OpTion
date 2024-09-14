@@ -8,6 +8,7 @@ Contact: haobo@stu.pku.edu.cn
 
 
 (* History *)
+(* 2024.09.15: Correct the symmetry operations of [nnm]. *)
 (* 2024.09.14: Fix the error of one-hadron with ND=2. *)
 (* 2024.09.13: Improve the projection method for one-hadron operators. *)
 (* 2024.08.19: Remove linearly-dependent operators. This happens especially for N-N scatterings or high back-to-back momenta. *)
