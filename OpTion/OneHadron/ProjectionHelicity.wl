@@ -15,6 +15,7 @@ SetNonCommutative[D];
 
 
 (* O^JM *)
+(* Note that here we use the subscript notation but function notation for particles. *)
 OJM[J_,M_,JD_,J13_,TG_,ND_]:=Module[{ope,m2,m3},
 (* TG: type of \[CapitalGamma]; ND: number of D *)
 ope=0;

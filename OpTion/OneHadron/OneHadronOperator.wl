@@ -1,8 +1,8 @@
 (* ::Package:: *)
 
 OneHadronOperatorAll::usage = "OneHadronOperatorAll[ptot,rep,r,MaxND] generates all possible one-hadron operators.";
-(* OneHadronOperatorHelicity::usage = "OneHadronOperatorHelicity[ptot,rep,r,J,\[Lambda],JD,J13,TG,ND] generates one-hadron operators."; *)
-(* OneHadronOperatorHelicityAll::usage = "OneHadronOperatorHelicityAll[ptot,rep,r,MaxND] generates all possible one-hadron operators using the helicity method."; *)
+OneHadronOperatorHelicity::usage = "OneHadronOperatorHelicity[ptot,rep,r,J,\[Lambda],JD,J13,TG,ND] generates one-hadron operators.";
+OneHadronOperatorHelicityAll::usage = "OneHadronOperatorHelicityAll[ptot,rep,r,MaxND] generates all possible one-hadron operators using the helicity method.";
 
 
 Begin["`OneHadronOperator`"];
@@ -21,7 +21,8 @@ Do[
 JG=If[TG==="S" || TG==="P",0,If[TG==="V" || TG==="A",1,-100]];
 Do[Do[Do[
 op=ProjectionOperator1[ptot,rep,r,J,M,JD,J13,TG,ND];
-If[!MemberQ[opList,op] && op =!= 0 && IsLinearlyIndependent[opList,op],AppendTo[opList,op]],{M,-J,J}],{JD,0,NJD}],{J,Abs[JG-ND],JG+ND}],{TG,{"S","P","V","A"}}],{ND,0,MaxND}];
+(* I commented out IsLinearlyIndependent[opList,op] since for one-hadron operators V_z will be seen as V and z in that function. *)
+If[!MemberQ[opList,op] && op =!= 0,AppendTo[opList,op]],{M,-J,J}],{JD,0,NJD}],{J,Abs[JG-ND],JG+ND}],{TG,{"S","P","V","A"}}],{ND,0,MaxND}];
 (* Abs[JG-ND] could change to 0 if there are two derivatives *)
 Return[opList];
 ];
