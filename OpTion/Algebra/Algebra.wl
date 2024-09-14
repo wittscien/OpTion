@@ -6,6 +6,7 @@ waverulesvar::usage = "replacing lists for two-hadron variable operators";
 waverulesOne::usage = "replacing lists for one-hadron operators";
 varToStringOne::usage = "replacing lists for one-hadron operators";
 PauliMatrix3d2::usage = "PauliMatrix3d2[k] gives the \!\(\*SuperscriptBox[\(k\), \(th\)]\) generalized Pauli matrix \!\(\*SubscriptBox[\(\[Sigma]\), \(k\)]\) for spin s=\!\(\*FractionBox[\(3\), \(2\)]\).";
+MyClebschGordan::usage = "MyClebschGordan[{j1,m1},{j2,m2},{j,m}] is the Mathematica ClebschGordan[{j1,m1},{j2,m2},{j,m}] but returns 0 instead of error for unphysical triangles.";
 ONormalize::usage = "ONormalize[ex] discard the coefficients of an expression. Also used in my contraction tools.";
 OSimplify::usage = "OSimplify[ex] transforms the operator expression from its spherical forms into Cartesian vector forms and normalizes the expression.";
 NCDSimplify::usage = "NCDSimplify[ex] transforms the operator expression from its spherical forms into Cartesian vector forms and normalizes the expression.";
@@ -115,6 +116,13 @@ PauliMatrix3d2[4]=({
  {0, 0, 1, 0},
  {0, 0, 0, 1}
 });
+
+
+MyClebschGordan[{j1_,m1_},{j2_,m2_},{j_,m_}]:=Module[{},
+If[m1+m2===m && Abs[j1-j2]<=j<=j1+j2,
+Return[ClebschGordan[{j1,m1},{j2,m2},{j,m}]],
+Return[0]];
+];
 
 
 ONormalize[ex_]:=Module[{constants,expReturn},

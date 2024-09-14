@@ -6,7 +6,7 @@ Gele::usage = "the Little group list.";
 parparity::usage = "parparity[parity] translate +, - to 1, -1.";
 GenerateMomVectors::usage = "GenerateMomVectors[N] generate momentum vectors whose norms are less than N."
 GenerateMomVectorsM::usage = "GenerateMomVectorsM[N,M,ptot] generate momentum vectors whose norms are less than N for M hadrons."
-IsLinearlyIndependent::usage = "IsLinearlyIndependent[exprList_,newExpr_] judges if newExpr is independent on expressions in exprList."
+IsLinearlyIndependent::usage = "IsLinearlyIndependent[exprList,newExpr] judges if newExpr is independent on expressions in exprList."
 
 
 Begin["`Misc`"];

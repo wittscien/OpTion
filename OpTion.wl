@@ -8,9 +8,11 @@ Contact: haobo@stu.pku.edu.cn
 
 
 (* History *)
-(* 2024.08.19: Remove linearly-dependent operators. This happens expeciaaly for N-N scatterings or high back-to-back momenta. *)
+(* 2024.09.14: Fix the error of one-hadron with ND=2. *)
+(* 2024.09.13: Improve the projection method for one-hadron operators. *)
+(* 2024.08.19: Remove linearly-dependent operators. This happens especially for N-N scatterings or high back-to-back momenta. *)
 (* 2024.08.19: Add general momenta. *)
-(* 2023.11.30: Stable. Build the package OpTion and release to CLQCD. *)
+(* 2023.11.30: Stable. Build the package OpTion and release the package to CLQCD. *)
 (* 2023.11.29: Change waverules from string to var. *)
 (* 2023.11.26: Start the construction for the little group of the double cover groups. *)
 (* 2023.11.25: Fix the double cover groups. The Wigner matrix was wrong *)
@@ -20,10 +22,10 @@ Contact: haobo@stu.pku.edu.cn
 (* 2023.03.08: Fix the little groups. *)
 (* 2023.03.07: Try to fix the little groups. *)
 (* 2023.02.15: Add the projection method for little groups. *)
-(* 2022.12.07: Fix the projection method. Everything works fine by now. *)
+(* 2022.12.07: Fix the projection method. Everything works fine now. *)
 (* 2022.12.03: Fix the partial-wave method. Add the parity interface. *)
 (* 2022.12.02: Fix the projection method. *)
-(* 2022.11.30: First version. The projection method does not consistent with the reference. *)
+(* 2022.11.30: First version. The projection method is not consistent with the reference. *)
 
 
 Print[Style["OpTion: package for Operator construcTion in lattice QCD.",Bold]];
@@ -48,6 +50,7 @@ files={
 "Groups/GroupsElements.wl",
 "Groups/WignerD.wl",
 "Groups/Representations.wl",
+"OneHadron/ProjectionHelicity.wl",
 "OneHadron/Projection.wl",
 "OneHadron/OneHadronOperator.wl",
 "TwoHadron/Projection.wl",

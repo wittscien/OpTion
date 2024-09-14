@@ -1,13 +1,13 @@
 (* ::Package:: *)
 
-ProjectionOperatorN::usage = "ProjectionOperatorN[group,r,p,s1,ms1,p1,s2,ms2,p2] generates two-hadron operators in the O group by projection.";
+ProjectionOperatorN::usage = "ProjectionOperatorN[group,r,p,s1,ms1,p1,s2,ms2,p2] generates two-hadron operators by projection.";
 
 
 Begin["`Projection`"];
 
 
 (* Projection method for hadron in any groups *)
-ProjectionOperatorN[ptot_,rep_,r_,momTuple_,parTuple_,msTuple_]:=Module[{group,repO,repparity,ope,parparity,Npar,sTuple,pTuple,singleMul,singleOpe,HadronName},
+ProjectionOperatorN[ptot_,rep_,r_,momTuple_,parTuple_,msTuple_]:=Module[{group,repO,repparity,ope,Npar,sTuple,pTuple,singleMul,singleOpe,HadronName},
 group=MomToGroup[ptot];
 (* Separate the parity of the rep. *)
 If[MemberQ[{"Oh","OhD"},group],
@@ -21,7 +21,6 @@ Npar=Length[momTuple];
 sTuple=ConstantArray[0,Npar];
 pTuple=ConstantArray[0,Npar];
 Do[{sTuple[[i]],pTuple[[i]]}=parTuple[[i]],{i,Npar}];
-parparity[parity_]:=If[parity==="+",Return[1],If[parity==="-",Return[-1],Print["wrong particle parity"]]];
 ope=0;
 (* The rotation elements *)
 Do[
@@ -44,7 +43,7 @@ Return[ope];
 ];
 
 
-ProjectionOperatorNString[ptot_,rep_,r_,momTuple_,parTuple_,msTuple_]:=Module[{group,repO,repparity,ope,parparity,Npar,sTuple,pTuple,singleMul,singleOpe,HadronName},
+ProjectionOperatorNString[ptot_,rep_,r_,momTuple_,parTuple_,msTuple_]:=Module[{group,repO,repparity,ope,Npar,sTuple,pTuple,singleMul,singleOpe,HadronName},
 group=MomToGroup[ptot];
 (* Separate the parity of the rep. *)
 If[MemberQ[{"Oh","OhD"},group],
@@ -58,7 +57,6 @@ Npar=Length[momTuple];
 sTuple=ConstantArray[0,Npar];
 pTuple=ConstantArray[0,Npar];
 Do[{sTuple[[i]],pTuple[[i]]}=parTuple[[i]],{i,Npar}];
-parparity[parity_]:=If[parity==="+",Return[1],If[parity==="-",Return[-1],Print["wrong particle parity"]]];
 ope=0;
 (* The rotation elements *)
 Do[
