@@ -79,7 +79,7 @@ If[Head[par1]===List,{s1,p1}=par1,{s1,p1}=ParToSpinParity[par1]];
 If[Head[par2]===List,{s2,p2}=par2,{s2,p2}=ParToSpinParity[par2]];
 repO=StringTake[rep,{1,-2}];
 repparity=If[StringPart[rep,-1]==="+",1,If[StringPart[rep,-1]==="-",-1,Print["wrong rep. parity"]]];
-If[repparity=!=(-1)^L parparity[p1] parparity[p2],Print["The choice of L does not match the parity of the representation. What makes you think so?"];Return[{}]];
+If[repparity=!=(-1)^L parparity[p1] parparity[p2],Print["The choice of L does not match the parity of the representation."];Return[{}]];
 group="Oh";
 momList=SortBy[Select[GenerateMomVectors[maxmom],Norm[ptot - #] <= maxmom &],Norm[#]^2 + Norm[ptot - #]^2 &];
 (* Search for all possible spins and momenta *)
