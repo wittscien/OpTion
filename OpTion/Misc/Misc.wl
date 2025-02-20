@@ -70,9 +70,14 @@ GenerateMomVectors[N_]:=Module[{},
 If[!IntegerQ[N] || N<0,Throw["N should be an positive integer.","f"]];Return[SortBy[Select[Tuples[Range[-N,N],3],Norm[#]<=N&],Norm]]];
 
 
-(* For M-hadron operators *)
-GenerateMomVectorsM[N_,M_,ptot_]:=Module[{},
+(* Deprecated: For M-hadron operators sorted by the sum of the norm squared *)
+GenerateMomVectorsMOld[N_,M_,ptot_]:=Module[{},
 Return[SortBy[Select[Tuples[GenerateMomVectors[N],M],Total[#]===ptot &],Total[(Norm/@#)^2]&]]];
+
+
+(* 2024.09.16: For M-hadron operators sorted by the distance to the CM momenta. *)
+GenerateMomVectorsM[N_,M_,ptot_]:=Module[{},
+Return[SortBy[Select[Tuples[GenerateMomVectors[N],M],Total[#]===ptot &],Total[(Norm/@(#-Table[ptot/2,M]))^2]&]]];
 
 
 (* 2024.08.19: Check linear dependency *)

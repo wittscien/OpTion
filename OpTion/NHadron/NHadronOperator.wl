@@ -1,7 +1,8 @@
 (* ::Package:: *)
 
 NHadronOperator::usage = "NHadronOperator[ptot,rep,r,momTuple,parTuple,msTuple] generates N-hadron operators by projection.";
-NHadronOperatorAll::usage = "NHadronOperatorAll[ptot,rep,r,maxmom,parTuple] generates all possible N-hadron operators by projection.";
+NHadronOperatorAll::usage = "NHadronOperatorAll[ptot,rep,r,maxmom,parTuple] generates all possible N-hadron operators with parTuple by projection.";
+NHadronOperatorAllMeson::usage = "NHadronOperatorAllMesonMeson[ptot,rep,r,maxmom,Npar] generates all possible N-hadron operators for meson by projection.";
 
 
 Begin["`NHadronOperator`"];
@@ -42,6 +43,16 @@ opList={};
 Do[
 op=NHadronOperator[ptot,rep,r,momTuple,parTuple,msTuple];
 If[!MemberQ[opList,op] && op =!= 0 && IsLinearlyIndependent[opList,op],AppendTo[opList,op]],{momTuple,momList},{msTuple,Tuples[Table[Range[-sTuple[[pari]],sTuple[[pari]]],{pari,Npar}]]}];
+Return[opList];
+];
+
+
+(* For paper: search for all operators with all gamma structures *)
+NHadronOperatorAllMeson[ptot_,rep_,r_,maxmom_,Npar_]:=Module[{opList,combinations,parTuple},
+opList={};
+(*Generate all combinations*)
+combinations=DeleteDuplicates[Sort/@Tuples[{"P","S","V","A"},Npar]];
+Do[opList=Join[opList,NHadronOperatorAll[ptot,rep,r,maxmom,parTuple]],{parTuple,combinations}];
 Return[opList];
 ];
 
