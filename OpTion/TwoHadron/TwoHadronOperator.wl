@@ -86,6 +86,7 @@ momList=SortBy[Select[GenerateMomVectors[maxmom],Norm[ptot - #] <= maxmom &],Nor
 opList={};
 Do[
 op=TwoHadronOperatorPartialWave[ptot,repO,r,mom,J,L,S,par1,par2];
+(* Print[J," ",L," ",S," ",op]; *)
 If[!MemberQ[opList,op] && op =!= 0,AppendTo[opList,op]],{mom,momList},{S,Abs[s1-s2],s1+s2},{J,Abs[L-S],L+S}];
 Return[opList];
 ];
