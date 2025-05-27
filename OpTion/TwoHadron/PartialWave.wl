@@ -29,7 +29,7 @@ Return[ope];
 
 PartialWaveOperatorProjected[rep_,r_,p_,J_,L_,S_,s1_,p1_,s2_,p2_]:=Module[{ope},
 ope=0;
-If[(rep==="A1" && J===0) || (rep==="T1" && J===1) || (rep==="T2" && J===2) || (rep==="E" && J===2) || (rep==="G1" && J===1/2) || (rep==="H" && (J===3/2||J===5/2)) || (rep==="G2" && J===5/2),
+If[(rep==="A1" && MemberQ[{0},J]) || (rep==="T1" && MemberQ[{1,3,4},J]) || (rep==="T2" && MemberQ[{2,3,4},J]) || (rep==="E" && MemberQ[{2,4},J]) || (rep==="G1" && MemberQ[{1/2},J]) || (rep==="H" && MemberQ[{3/2,5/2},J]) || (rep==="G2" && MemberQ[{5/2},J]),
 Do[ope+=subduction[{J,rep}][[r,-mJ+J+1]]PartialWaveOperator[p,J,mJ,L,S,s1,p1,s2,p2],{mJ,-J,J}];
 ope=OSimplify[ope]];
 Return[ope];
