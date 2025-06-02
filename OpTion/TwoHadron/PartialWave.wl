@@ -12,7 +12,7 @@ ope=0;
 (* 2025.06.02: This is equivalent to define Y_l^m = 0 for |p|!=0 and L!=0. The line "If[p==={0,0,0} && L!=0,Return[0]];" was commented out but I forgot why. Now I recover this line. *)
 (* 2023.11.30: The comment last year seems to work only for mesons. But I am curious how baryon, without relative momenta, sustains orbital angular momentum. *)
 (* 2022.12.03: If |p|==0, there is no way to have angular momentum. So PV |p|=0 Subscript[A, 1] rep. has no operator. The Eq. (4.11) in Prelovsek's paper should be refined. *)
-If[p==={0,0,0} && L!=0,Return[0]];
+If[p==={0,0,0} && L=!=0,Return[0]];
 Do[Do[Do[Do[If[mL+mS===mJ && ms1+ms2===mS,
 beforeprojection=0;
 Do[newp=RotationMatrix[Oh["\[Omega]"][[i]],Oh["n"][[i]]] . p;
