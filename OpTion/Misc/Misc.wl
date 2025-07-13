@@ -14,7 +14,6 @@ Begin["`Misc`"];
 
 (* Translate the total momentum into the (little) group *)
 MomToGroup[ptot_,IfD_]:=Module[{x,y,z,group},
-If[ptot==={0,0,0},Return["Oh"]];
 Assert[Length[ptot]===3];
 {x,y,z}=ptot;
 group="";

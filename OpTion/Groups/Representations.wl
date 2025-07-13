@@ -167,7 +167,10 @@ If[MemberQ[{2,26},i],mat=X[2]];
 If[MemberQ[{41,17},i],mat=-X[4]];
 If[MemberQ[{19,43},i],mat=-X[5]];
 If[MemberQ[{21,45},i],mat=-X[6]];
-matele=mat[[a,b]]]
+matele=mat[[a,b]]];
+If[rep==="G1",
+matele=ODrep["G1",i,a,b];
+If[MemberQ[{1,19,21,43,45,17},i],matele=-matele]];
 ];
 (* [n,m,0] *)
 If[group==="C2nm0D",

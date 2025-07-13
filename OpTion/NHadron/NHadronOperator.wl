@@ -2,7 +2,7 @@
 
 NHadronOperator::usage = "NHadronOperator[ptot,rep,r,momTuple,parTuple,msTuple] generates N-hadron operators by projection.";
 NHadronOperatorAll::usage = "NHadronOperatorAll[ptot,rep,r,maxmom,parTuple] generates all possible N-hadron operators with parTuple by projection.";
-NHadronOperatorAllMeson::usage = "NHadronOperatorAllMesonMeson[ptot,rep,r,maxmom,Npar] generates all possible N-hadron operators for meson by projection.";
+NHadronOperatorAllMeson::usage = "NHadronOperatorAllMeson[ptot,rep,r,maxmom,Npar] generates all possible N-hadron operators for mesons by projection.";
 
 
 Begin["`NHadronOperator`"];

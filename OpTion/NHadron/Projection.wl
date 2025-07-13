@@ -7,8 +7,9 @@ Begin["`Projection`"];
 
 
 (* Projection method for hadron in any groups *)
-ProjectionOperatorN[ptot_,rep_,r_,momTuple_,parTuple_,msTuple_]:=Module[{group,repO,repparity,ope,Npar,sTuple,pTuple,singleMul,singleOpe,HadronName},
-group=MomToGroup[ptot];
+ProjectionOperatorN[ptot_,rep_,r_,momTuple_,parTuple_,msTuple_]:=Module[{ifD,group,repO,repparity,ope,Npar,sTuple,pTuple,singleMul,singleOpe,HadronName},
+ifD=If[IntegerQ[msTuple[[1]]+msTuple[[2]]],0,1];
+group=MomToGroup[ptot,ifD];
 (* Separate the parity of the rep. *)
 If[MemberQ[{"Oh","OhD"},group],
 repO=StringTake[rep,{1,-2}];
