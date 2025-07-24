@@ -31,7 +31,7 @@ Please see [Manual/OpTion_manual.pdf](https://github.com/wittscien/OpTion/blob/m
 
 Please acknowledge our work when you use OpTion in your research by citing the following paper where the construction method is described:
 
-* Haobo Yan *et al*, in preparation, [arXiv:2408.xxxx](https://arxiv.org/abs/2408.xxxx).
+* Haobo Yan, Chuan Liu, Liuming Liu, and Yu Meng, [arXiv:2507.16070](https://arxiv.org/abs/2507.16070).
 
 ## Contact
 
