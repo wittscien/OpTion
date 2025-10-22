@@ -3,6 +3,8 @@
 OneHadronOperatorAll::usage = "OneHadronOperatorAll[ptot,rep,r,MaxND] generates all possible one-hadron operators.";
 OneHadronOperatorHelicity::usage = "OneHadronOperatorHelicity[ptot,rep,r,J,\[Lambda],JD,J13,TG,ND] generates one-hadron operators.";
 OneHadronOperatorHelicityAll::usage = "OneHadronOperatorHelicityAll[ptot,rep,r,MaxND] generates all possible one-hadron operators using the helicity method.";
+PrintOneHadronOperatorAll::usage = "PrintOneHadronOperatorAll[ptot,rep,r,MaxND] generates and printsall possible one-hadron operators.";
+PrintOneHadronOperatorHelicityAll::usage = "PrintOneHadronOperatorHelicityAll[ptot,rep,r,MaxND] generates and prints all possible one-hadron operators using the helicity method.";
 
 
 Begin["`OneHadronOperator`"];
@@ -105,6 +107,8 @@ Return[opList];
 
 
 OneHadronOperator[rep_,r_,MaxND_]:=OneHadronOperator[{0,0,0},rep,r,MaxND];
+PrintOneHadronOperatorAll[ptot_,rep_,r_,MaxND_]:=Print/@OneHadronOperatorAll[ptot,rep,r,MaxND];
+PrintOneHadronOperatorHelicity[ptot_,rep_,r_,J_,\[Lambda]_,JD_,J13_,TG_,ND_]:=Print/@OneHadronOperatorHelicity[ptot,rep,r,J,\[Lambda],JD,J13,TG,ND];
 
 
 End[];
