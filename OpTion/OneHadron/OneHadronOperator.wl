@@ -24,7 +24,7 @@ JG=If[TG==="S" || TG==="P",0,If[TG==="V" || TG==="A",1,-100]];
 Do[Do[Do[
 op=ProjectionOperator1[ptot,rep,r,J,M,JD,J13,TG,ND];
 (* I commented out IsLinearlyIndependent[opList,op] since for one-hadron operators V_z will be seen as V and z in that function. *)
-If[!MemberQ[opList,op] && op =!= 0,AppendTo[opList,op]],{M,-J,J}],{JD,0,NJD}],{J,Abs[JG-ND],JG+ND}],{TG,{"S","P","V","A"}}],{ND,0,MaxND}];
+If[!MemberQ[opList,op] && op =!= 0,AppendTo[opList,op]],{M,-J,J}],{JD,0,NJD}],{J,0,JG+ND}],{TG,{"S","P","V","A"}}],{ND,0,MaxND}];
 (* Abs[JG-ND] could change to 0 if there are two derivatives *)
 Return[opList];
 ];
