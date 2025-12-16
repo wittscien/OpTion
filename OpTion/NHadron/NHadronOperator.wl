@@ -60,7 +60,7 @@ Return[opList];
 
 
 NHadronOperatorAll[rep_,r_,maxmom_,parTuple_]:=NHadronOperatorAll[{0,0,0},rep,r,maxmom,parTuple];
-PrintNHadronOperatorAll[rep_,r_,maxmom_,parTuple_]:=Print/@NHadronOperatorAll[rep,r,maxmom,parTuple];
+PrintNHadronOperatorAll[ptot_,rep_,r_,maxmom_,parTuple_]:=Print/@NHadronOperatorAll[ptot,rep,r,maxmom,parTuple];
 
 
 End[];
