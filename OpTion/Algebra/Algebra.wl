@@ -3,6 +3,7 @@
 symbols::usage = "replacing lists for momentum";
 (*waverules::usage = "replacing lists for two-hadron string operators";*)
 waverulesvar::usage = "replacing lists for two-hadron variable operators";
+waverulesText::usage = "Change from string to cleaner expression";
 waverulesOne::usage = "replacing lists for one-hadron operators";
 varToStringOne::usage = "replacing lists for one-hadron operators";
 PauliMatrix3d2::usage = "PauliMatrix3d2[k] gives the \!\(\*SuperscriptBox[\(k\), \(th\)]\) generalized Pauli matrix \!\(\*SubscriptBox[\(\[Sigma]\), \(k\)]\) for spin s=\!\(\*FractionBox[\(3\), \(2\)]\).";
@@ -58,6 +59,34 @@ OpTion`Projection`H[i_,1/2,1/2,"+"][p_]:>Subscript["\!\(\*SubscriptBox[\(N\), \(
 OpTion`Projection`H[i_,1/2,-(1/2),"+"][p_]:>Subscript["\!\(\*SubscriptBox[\(N\), \("<>ToString[i]<>"\)]\)", -(1/2)][p],
 OpTion`Projection`H[i_,1/2,1/2,"-"][p_]:>Subscript["\!\(\*SubscriptBox[\(M\), \("<>ToString[i]<>"\)]\)", (1/2)][p],
 OpTion`Projection`H[i_,1/2,-(1/2),"-"][p_]:>Subscript["\!\(\*SubscriptBox[\(M\), \("<>ToString[i]<>"\)]\)", -(1/2)][p]
+};
+
+(* 2025.12.21: to make expression cleaner, prepare for Python operator list *)
+waverulesText={
+"\!\(\*SubscriptBox[\(P\), \(1\)]\)"->"P1",
+"\!\(\*SubscriptBox[\(P\), \(2\)]\)"->"P2",
+"\!\(\*SubscriptBox[\(S\), \(1\)]\)"->"S1",
+"\!\(\*SubscriptBox[\(S\), \(2\)]\)"->"S2",
+Subscript["\!\(\*SubscriptBox[\(V\), \(1\)]\)", "x"]->"V1x",
+Subscript["\!\(\*SubscriptBox[\(V\), \(1\)]\)", "y"]->"V1y",
+Subscript["\!\(\*SubscriptBox[\(V\), \(1\)]\)", "z"]->"V1z",
+Subscript["\!\(\*SubscriptBox[\(V\), \(2\)]\)", "x"]->"V2x",
+Subscript["\!\(\*SubscriptBox[\(V\), \(2\)]\)", "y"]->"V2y",
+Subscript["\!\(\*SubscriptBox[\(V\), \(2\)]\)", "z"]->"V2z",
+Subscript["\!\(\*SubscriptBox[\(A\), \(1\)]\)", "x"]->"A1x",
+Subscript["\!\(\*SubscriptBox[\(A\), \(1\)]\)", "y"]->"A1y",
+Subscript["\!\(\*SubscriptBox[\(A\), \(1\)]\)", "z"]->"A1z",
+Subscript["\!\(\*SubscriptBox[\(A\), \(2\)]\)", "x"]->"A2x",
+Subscript["\!\(\*SubscriptBox[\(A\), \(2\)]\)", "y"]->"A2y",
+Subscript["\!\(\*SubscriptBox[\(A\), \(2\)]\)", "z"]->"A2z",
+Subscript["\!\(\*SubscriptBox[\(N\), \(1\)]\)", (1/2)]->"N12",
+Subscript["\!\(\*SubscriptBox[\(N\), \(1\)]\)", (-1/2)]->"Nm12",
+Subscript["\!\(\*SubscriptBox[\(N\), \(2\)]\)", (1/2)]->"N12",
+Subscript["\!\(\*SubscriptBox[\(N\), \(2\)]\)", (-1/2)]->"Nm12",
+Subscript["\!\(\*SubscriptBox[\(M\), \(1\)]\)", (1/2)]->"M12",
+Subscript["\!\(\*SubscriptBox[\(M\), \(1\)]\)", (-1/2)]->"Mm12",
+Subscript["\!\(\*SubscriptBox[\(M\), \(2\)]\)", (1/2)]->"M12",
+Subscript["\!\(\*SubscriptBox[\(M\), \(2\)]\)", (-1/2)]->"Mm12"
 };
 
 

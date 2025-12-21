@@ -3,9 +3,9 @@
 TwoHadronOperator::usage = "TwoHadronOperator[ptot,rep,r,mom,par1,ms1,par2,ms2] generates two-hadron operators by projection.";
 TwoHadronOperatorPartialWave::usage = "TwoHadronOperatorPartialWave[ptot,rep,r,mom,J,L,S,par1,par2] generates two-hadron operators by partial wave coupling."
 TwoHadronOperatorAll::usage = "TwoHadronOperatorAll[ptot,rep,r,maxmom,par1,par2] generates all possible two-hadron operators by projection.";
-TwoHadronOperatorPartialWaveAll::usage = "TwoHadronOperatorPartialWaveAll[ptot,rep,r,maxmom,par1,par2,L] generates all possible two-hadron operators by partial wave coupling.";
-PrintTwoHadronOperatorAll::usage = "PrintTwoHadronOperatorAll[ptot,rep,r,maxmom,par1,par2] generates and printsall possible two-hadron operators by projection.";
-PrintTwoHadronOperatorPartialWaveAll::usage = "PrintTwoHadronOperatorPartialWaveAll[ptot,rep,r,maxmom,par1,par2,L] generates and prints all possible two-hadron operators by partial wave coupling.";
+TwoHadronOperatorPartialWaveAll::usage = "TwoHadronOperatorPartialWaveAll[ptot,rep,r,maxmom,par1,par2,L,printJLS] generates all possible two-hadron operators by partial wave coupling.";
+PrintTwoHadronOperatorAll::usage = "PrintTwoHadronOperatorAll[ptot,rep,r,maxmom,par1,par2,printPython] generates and printsall possible two-hadron operators by projection.";
+PrintTwoHadronOperatorPartialWaveAll::usage = "PrintTwoHadronOperatorPartialWaveAll[ptot,rep,r,maxmom,par1,par2,L,printPython] generates and prints all possible two-hadron operators by partial wave coupling.";
 
 
 Begin["`TwoHadronOperator`"];
@@ -94,10 +94,29 @@ If[printJLS,Return[{JLSList,opList}],Return[opList]];
 TwoHadronOperatorPartialWaveAll[ptot_,rep_,r_,maxmom_,par1_,par2_,L_]:=TwoHadronOperatorPartialWaveAll[ptot,rep,r,maxmom,par1,par2,L,True];
 
 
-TwoHadronOperatorAll[rep_,r_,maxmom_,par1_,par2_]:=TwoHadronOperatorAll[{0,0,0},rep,r,maxmom,par1,par2];
-PrintTwoHadronOperatorAll[ptot_,rep_,r_,maxmom_,par1_,par2_]:=Print/@TwoHadronOperatorAll[ptot,rep,r,maxmom,par1,par2];
-(* Print with JLS *)
-PrintTwoHadronOperatorPartialWaveAll[ptot_,rep_,r_,maxmom_,par1_,par2_,L_]:=MapThread[Print["{J,L,S}=",#1,": ",#2]&,TwoHadronOperatorPartialWaveAll[ptot,rep,r,maxmom,par1,par2,L,True]];
+(* Print with Python input *)
+PrintTwoHadronOperatorAll[ptot_,rep_,r_,maxmom_,par1_,par2_,printPython_]:=Module[{opList,PythonList},
+opList=TwoHadronOperatorAll[ptot,rep,r,maxmom,par1,par2];
+If[printPython,
+PythonList=OperatorToPython/@opList;
+MapThread[(Print[#1]; Print[Style[#2,Gray]];)&, {opList, PythonList}],
+Print/@opList;
+];
+];
+
+PrintTwoHadronOperatorPartialWaveAll[ptot_,rep_,r_,maxmom_,par1_,par2_,L_,printPython_]:=Module[{JLSList,opList,PythonList},
+opList=TwoHadronOperatorPartialWaveAll[ptot,rep,r,maxmom,par1,par2,L,True];
+{JLSList,opList}=opList;
+If[printPython,
+PythonList=OperatorToPython/@opList;
+MapThread[(Print[Style["{J,L,S}=",Brown],Style[#1,Brown],Style[": ",Brown],#2]; Print[Style[#3,LightGray]];)&, {JLSList, opList, PythonList}],
+MapThread[Print[Style["{J,L,S}=",Brown],Style[#1,Brown],Style[": ",Brown],#2]&,{JLSList, opList}];
+];
+];
+
+(*Default is not to print the Python list *)
+PrintTwoHadronOperatorAll[ptot_,rep_,r_,maxmom_,par1_,par2_]:=PrintTwoHadronOperatorAll[ptot,rep,r,maxmom,par1,par2,False];
+PrintTwoHadronOperatorPartialWaveAll[ptot_,rep_,r_,maxmom_,par1_,par2_,L_]:=PrintTwoHadronOperatorPartialWaveAll[ptot,rep,r,maxmom,par1,par2,L,False];
 
 
 End[];

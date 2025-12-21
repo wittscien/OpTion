@@ -30,7 +30,7 @@ Contact: haobo@stu.pku.edu.cn
 
 
 Print[Style["OpTion: package for Operator construcTion in lattice QCD.",Bold]];
-Print["Authors: Haobo Yan"];
+Print["Author: Haobo Yan"];
 Print["Contact: haobo@stu.pku.edu.cn"];
 BeginPackage["OpTion`"];
 
