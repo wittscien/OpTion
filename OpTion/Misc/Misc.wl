@@ -101,7 +101,7 @@ opMap=<|"P1"->5,"P2"->5,"S1"->0,"S2"->0,"V1x"->1,"V1y"->2,"V1z"->3,"V2x"->1,"V2y
 parseTerm[opmonomial_Times]:=Module[{factors,coeff,factorsList1,gm1,mom1,factorsList2,gm2,mom2,OpPythonMonomial},
 factors=List@@opmonomial;
 (* Extract coefficients *)
-If[IntegerQ[factors[[1]]],
+If[NumberQ[factors[[1]]],
 coeff=factors[[1]];
 factors=factors[[2;;]],
 coeff=1;
