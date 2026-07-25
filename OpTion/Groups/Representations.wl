@@ -14,7 +14,8 @@ Begin["`Representations`"];
 Orep[rep_,i_,a_,b_]:=Module[{Id,mat,matele},
 matele=0;
 Id={{1,0},{0,1}};
-If[rep==="A1",matele=1];
+If[rep==="A1" || rep==="A2",matele=1];
+If[rep ==="A2" && 10<=i<=21,matele=-matele];
 If[rep==="T1" || rep==="T2",matele=Cos[Oh["\[Omega]"][[i]]] KroneckerDelta[a,b]+(1-Cos[Oh["\[Omega]"][[i]]] )Oh["n"][[i]][[a]] Oh["n"][[i]][[b]]-Sin[Oh["\[Omega]"][[i]]] (LeviCivitaTensor[3,List] . Oh["n"][[i]])[[a,b]]];
 If[rep ==="T2" && 10<=i<=21,matele=-matele];
 If[rep==="E",
@@ -32,7 +33,8 @@ Return[matele];
 ODrep[rep_,i_,a_,b_]:=Module[{Id,mat,matele},
 matele=0;
 Id={{1,0},{0,1}};
-If[rep==="A1",matele=1];
+If[rep==="A1" || rep==="A2",matele=1];
+If[rep ==="A2" && (10<=i<=21 || 10+24<=i<=21+24),matele=-matele];
 If[rep==="T1" || rep==="T2",matele=Cos[OhD["\[Omega]"][[i]]] KroneckerDelta[a,b]+(1-Cos[OhD["\[Omega]"][[i]]] )OhD["n"][[i]][[a]] OhD["n"][[i]][[b]]-Sin[OhD["\[Omega]"][[i]]] (LeviCivitaTensor[3,List] . OhD["n"][[i]])[[a,b]]];
 If[rep ==="T2" && (10<=i<=21 || 10+24<=i<=21+24),matele=-matele];
 If[rep==="E",
