@@ -2,6 +2,8 @@
 
 subduction::usage = "subduction matrices.";
 subductionLittle::usage = "subductionLittle[group,rep,r,\[Eta]tilde,\[Lambda]] gives the subduction matrices for little gropus.";
+SubductionMultiplicity::usage = "SubductionMultiplicity[ptot,rep,J,parity] gives the occurrence count of rep in integer J with parity \"+\" or \"-\". Use MomToGroup's standard momentum directions and signed rest-frame irreps such as \"T1+\".";
+SubductionTable::usage = "SubductionTable[ptot,Jmax] returns an Association rep -> {{J,parity,multiplicity},...} for integer 0<=J<=Jmax and both parities. Zero occurrences are omitted; empty irreps are retained.";
 
 
 Begin["`Subduction`"];
@@ -59,6 +61,27 @@ If[MemberQ[{{"C4v","E2",2,3}},indices],S=(-KroneckerDelta[Sign[\[Lambda]],1]+\[E
 If[MemberQ[{{"C3v","E2",2,2}},indices],S=(-KroneckerDelta[Sign[\[Lambda]],1]-\[Eta]tilde KroneckerDelta[Sign[\[Lambda]],-1])/Sqrt[2],
 S=0;(*Print["Wrong subduction"]*)]]]]]];
 Return[S];
+];
+
+
+(* Integer-J content from characters, independent of the finite coefficient tables above. *)
+subductionIrrepDimensions=<|"Oh"-><|"A1"->1,"A2"->1,"E"->2,"T1"->3,"T2"->3|>,"C4v"-><|"A1"->1,"A2"->1,"B1"->1,"B2"->1,"E2"->2|>,"C2v"-><|"A1"->1,"A2"->1,"B1"->1,"B2"->1|>,"C3v"-><|"A1"->1,"A2"->1,"E2"->2|>,"C2nm0"-><|"A"->1,"B"->1|>,"C2nnm"-><|"A"->1,"B"->1|>,"C1"-><|"A"->1|>|>;
+
+SubductionMultiplicity[ptot_,rep_,J_Integer,parity_]/;J>=0:=Module[{group,repO=rep,eta,repeta=1,dim,elements,chi,n=0},
+group=MomToGroup[ptot];eta=parparity[parity];
+If[group==="Oh",repO=StringDrop[rep,-1];repeta=parparity[StringTake[rep,-1]]];
+dim=subductionIrrepDimensions[group][repO];elements=Gele[group];
+(* The finite cosine sum is the integer-J rotation character, including omega=0. *)
+Do[chi=Total[Table[Representation[group,repO,inv,i,r,r],{r,dim}]];If[group==="Oh",chi*=repeta^inv];n+=Conjugate[chi] eta^inv (1+2 Total[Cos[Range[J] Oh["\[Omega]"][[i]]]]),{inv,0,1},{i,elements[If[inv===0,"+","-"]]}];
+Return[FullSimplify[n/Total[Length/@Values[elements]]]];
+];
+
+SubductionTable[ptot_,Jmax_Integer]/;Jmax>=0:=Module[{group,reps,result,n},
+group=MomToGroup[ptot];reps=Keys[subductionIrrepDimensions[group]];
+If[group==="Oh",reps=Flatten[Table[rep<>parity,{rep,reps},{parity,{"+","-"}}]]];
+result=AssociationMap[{}&,reps];
+Do[n=SubductionMultiplicity[ptot,rep,J,parity];If[n>0,AssociateTo[result,rep->Append[result[rep],{J,parity,n}]]],{rep,reps},{J,0,Jmax},{parity,{"+","-"}}];
+Return[result];
 ];
 
 

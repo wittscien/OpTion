@@ -1,0 +1,435 @@
+Notebook[
+ {Cell[CellGroupData[
+    {Cell[BoxData[RowBox[{RowBox[{RowBox[{"Get", "[", 
+             RowBox[{"FileNameJoin", "[", RowBox[{"{", RowBox[
+                  {RowBox[{"ParentDirectory", "[", RowBox[
+                      {"NotebookDirectory", "[", "]"}], "]"}], ",", " ", 
+                   "\"OpTion.wl\""}], "}"}], "]"}], "]"}], ";"}], " "}]], 
+      "Input", CellChangeTimes -> {3.997884888467657*^9}, 
+      ExpressionUUID -> "0aed26e8-c98d-4fff-b524-b1f6decd5acd"], 
+     Cell[CellGroupData[
+       {Cell[BoxData[StyleBox[
+           "\"OpTion: package for Operator construcTion in lattice QCD.\"", 
+           StripOnInput -> False, FontWeight -> Bold]], "Print", 
+         CellChangeTimes -> {3.997884777792305*^9}, CellLabel -> 
+          "\:6b63\:5728\:8ba1\:7b97In[7]:=", ExpressionUUID -> 
+          "2201c142-d5d7-4c99-afca-2ce24adc4a8b"], 
+        Cell[BoxData["\"Author: Haobo Yan\""], "Print", CellChangeTimes -> 
+          {3.9978847777932377*^9}, CellLabel -> 
+          "\:6b63\:5728\:8ba1\:7b97In[7]:=", ExpressionUUID -> 
+          "c8f98143-3046-41b6-be0b-aa0fcab48abc"], 
+        Cell[BoxData["\"Contact: haobo@stu.pku.edu.cn\""], "Print", 
+         CellChangeTimes -> {3.997884777794186*^9}, CellLabel -> 
+          "\:6b63\:5728\:8ba1\:7b97In[7]:=", ExpressionUUID -> 
+          "b883cd90-98b9-463a-b2da-87f36d1914b1"]}, Open]]}, Open]], 
+  Cell[BoxData[RowBox[
+     {RowBox[{"(*", " ", RowBox[{RowBox[{"Display", " ", 
+            RowBox[{"only", ":", " ", RowBox[{"rows", " ", "are", " ", 
+                "irreps"}]}]}], ",", " ", RowBox[{"columns", " ", "are", " ", 
+            RowBox[{"J", "^", "P"}]}], ",", " ", 
+          RowBox[{"and", " ", "entries", " ", "are", " ", "multiplicities", 
+            " ", RowBox[{RowBox[{"(", RowBox[{"0", " ", "means", " ", 
+                  "absent"}], ")"}], "."}]}]}], " ", "*)"}], 
+      "\[IndentingNewLine]", RowBox[
+       {RowBox[{RowBox[{RowBox[{"showSubduction", "[", RowBox[{"ptot_", ",", 
+                " ", "Jmax_"}], "]"}], " ", ":=", " ", 
+            RowBox[{"Module", "[", RowBox[{RowBox[{"{", RowBox[
+                   {RowBox[{"table", " ", "=", " ", RowBox[
+                       {"SubductionTable", "[", RowBox[{"ptot", ",", " ", 
+                          "Jmax"}], "]"}]}], ",", " ", "jp", ",", " ", 
+                    "labels", ",", " ", "rows"}], "}"}], ",", " ", 
+                RowBox[{RowBox[{"jp", " ", "=", " ", RowBox[{"Tuples", "[", 
+                      RowBox[{"{", RowBox[{RowBox[{"Range", "[", RowBox[
+                          {"0", ",", " ", "Jmax"}], "]"}], ",", " ", RowBox[
+                          {"{", RowBox[{"\"+\"", ",", " ", "\"-\""}], 
+                          "}"}]}], "}"}], "]"}]}], ";", " ", RowBox[
+                   {"labels", " ", "=", " ", RowBox[{"AssociationMap", "[", 
+                      RowBox[{RowBox[{RowBox[{"With", "[", RowBox[{RowBox[
+                          {"{", RowBox[{RowBox[{"a", " ", "=", " ", RowBox[
+                          {"StringTake", "[", RowBox[{"#1", ",", " ", "1"}], 
+                          "]"}]}], ",", " ", RowBox[{"i", " ", "=", " ", 
+                          RowBox[{"StringJoin", "[", RowBox[{"StringCases", 
+                          "[", RowBox[{"#1", ",", " ", "DigitCharacter"}], 
+                          "]"}], "]"}]}], ",", " ", RowBox[{"p", " ", "=", 
+                          " ", RowBox[{"StringJoin", "[", RowBox[
+                          {"StringCases", "[", RowBox[{"#1", ",", " ", RowBox[
+                          {"\"+\"", " ", "|", " ", "\"-\""}]}], "]"}], 
+                          "]"}]}]}], "}"}], ",", " ", RowBox[{"If", "[", 
+                          RowBox[{RowBox[{"p", " ", "===", " ", "\"\""}], 
+                          ",", " ", RowBox[{"If", "[", RowBox[{RowBox[{"i", 
+                          " ", "===", " ", "\"\""}], ",", " ", "a", ",", " ", 
+                          RowBox[{"Subscript", "[", RowBox[{"a", ",", " ", 
+                          "i"}], "]"}]}], "]"}], ",", " ", RowBox[{"If", "[", 
+                          RowBox[{RowBox[{"i", " ", "===", " ", "\"\""}], 
+                          ",", " ", RowBox[{"Superscript", "[", RowBox[{"a", 
+                          ",", " ", "p"}], "]"}], ",", " ", RowBox[
+                          {"Subsuperscript", "[", RowBox[{"a", ",", " ", "i", 
+                          ",", " ", "p"}], "]"}]}], "]"}]}], "]"}]}], "]"}], 
+                          " ", "&"}], " ", ",", " ", RowBox[{"Keys", "[", 
+                          "table", "]"}]}], "]"}]}], ";", " ", RowBox[
+                   {"rows", " ", "=", " ", RowBox[{"Table", "[", RowBox[
+                       {RowBox[{"Prepend", "[", RowBox[{RowBox[{"Table", "[", 
+                          RowBox[{RowBox[{"Total", "[", RowBox[{"Cases", "[", 
+                          RowBox[{RowBox[{"table", "[", "rep", "]"}], ",", 
+                          " ", RowBox[{RowBox[{"{", RowBox[{RowBox[
+                          {"channel", "[", RowBox[{"[", "1", "]"}], "]"}], 
+                          ",", " ", RowBox[{"channel", "[", RowBox[{"[", "2", 
+                          "]"}], "]"}], ",", " ", "n_"}], "}"}], " ", ":>", 
+                          " ", "n"}]}], "]"}], "]"}], ",", " ", RowBox[{"{", 
+                          RowBox[{"channel", ",", " ", "jp"}], "}"}]}], 
+                          "]"}], ",", " ", RowBox[{"labels", "[", "rep", 
+                          "]"}]}], "]"}], ",", " ", RowBox[{"{", RowBox[
+                          {"rep", ",", " ", RowBox[{"Keys", "[", "table", 
+                          "]"}]}], "}"}]}], "]"}]}], ";", " ", RowBox[
+                   {"Grid", "[", RowBox[{RowBox[{"Prepend", "[", RowBox[
+                         {"rows", ",", " ", RowBox[{RowBox[{"(", RowBox[
+                          {RowBox[{"Style", "[", RowBox[{"#1", ",", " ", 
+                          "Bold"}], "]"}], " ", "&"}], " ", ")"}], " ", "/@", 
+                          " ", RowBox[{"Prepend", "[", RowBox[{RowBox[
+                          {"Superscript", " ", "@@@", " ", "jp"}], ",", " ", 
+                          RowBox[{"Row", "[", RowBox[{"{", RowBox[
+                          {"\"Irrep / \"", ",", " ", RowBox[{"Superscript", 
+                          "[", RowBox[{"\"J\"", ",", " ", "\"P\""}], "]"}]}], 
+                          "}"}], "]"}]}], "]"}]}]}], "]"}], ",", " ", 
+                      RowBox[{"Frame", " ", "->", " ", "All"}], ",", " ", 
+                      RowBox[{"Alignment", " ", "->", " ", "Center"}], ",", 
+                      " ", RowBox[{"Spacings", " ", "->", " ", RowBox[
+                         {"{", RowBox[{"1.2", ",", " ", "0.7"}], "}"}]}], 
+                      ",", " ", RowBox[{"Background", " ", "->", " ", 
+                        RowBox[{"{", RowBox[{"None", ",", " ", RowBox[{"{", 
+                          RowBox[{RowBox[{"GrayLevel", "[", "0.93", "]"}], 
+                          ",", " ", RowBox[{"{", RowBox[{"White", ",", " ", 
+                          RowBox[{"GrayLevel", "[", "0.98", "]"}]}], "}"}]}], 
+                          "}"}]}], "}"}]}], ",", " ", RowBox[{"BaseStyle", 
+                        " ", "->", " ", RowBox[{"{", RowBox[{RowBox[
+                          {"FontFamily", " ", "->", " ", "\"Times\""}], ",", 
+                          " ", RowBox[{"FontSize", " ", "->", " ", "14"}]}], 
+                          "}"}]}]}], "]"}]}]}], "]"}]}], ";"}], " "}]}]], 
+   "Input", CellLabel -> "In[8]:=", ExpressionUUID -> 
+    "0c0c24bb-5596-4055-ac82-752f0edf826f"], 
+  Cell[CellGroupData[
+    {Cell[BoxData[RowBox[{RowBox[{"(*", " ", RowBox[
+            {RowBox[{RowBox[{"Center", "-", "of", "-", RowBox[{"mass", " ", 
+                   RowBox[{"frame", ":", " ", "p"}]}]}], " ", "=", " ", 
+               RowBox[{"(", RowBox[{"0", ",", "0", ",", "0"}], ")"}]}], ",", 
+             " ", RowBox[{"J", " ", "<=", " ", "4."}]}], " ", "*)"}], 
+         "\[IndentingNewLine]", RowBox[{"showSubduction", "[", 
+           RowBox[{RowBox[{"{", RowBox[{"0", ",", " ", "0", ",", " ", "0"}], 
+               "}"}], ",", " ", "4"}], "]"}]}]], "Input", 
+      CellLabel -> "In[9]:=", ExpressionUUID -> 
+       "50fa18fc-1ea0-43f2-a9bc-80ddbd724ff7"], 
+     Cell[BoxData[TagBox[GridBox[{{StyleBox[TemplateBox[{"\"Irrep / \"", 
+              TemplateBox[{"\"J\"", "\"P\""}, "Superscript", SyntaxForm -> 
+                SuperscriptBox]}, "RowDefault"], StripOnInput -> False, 
+            FontWeight -> Bold], StyleBox[TemplateBox[{"0", "\"+\""}, 
+             "Superscript"], StripOnInput -> False, FontWeight -> Bold], 
+           StyleBox[TemplateBox[{"0", "\"-\""}, "Superscript"], 
+            StripOnInput -> False, FontWeight -> Bold], 
+           StyleBox[TemplateBox[{"1", "\"+\""}, "Superscript"], 
+            StripOnInput -> False, FontWeight -> Bold], 
+           StyleBox[TemplateBox[{"1", "\"-\""}, "Superscript"], 
+            StripOnInput -> False, FontWeight -> Bold], 
+           StyleBox[TemplateBox[{"2", "\"+\""}, "Superscript"], 
+            StripOnInput -> False, FontWeight -> Bold], 
+           StyleBox[TemplateBox[{"2", "\"-\""}, "Superscript"], 
+            StripOnInput -> False, FontWeight -> Bold], 
+           StyleBox[TemplateBox[{"3", "\"+\""}, "Superscript"], 
+            StripOnInput -> False, FontWeight -> Bold], 
+           StyleBox[TemplateBox[{"3", "\"-\""}, "Superscript"], 
+            StripOnInput -> False, FontWeight -> Bold], 
+           StyleBox[TemplateBox[{"4", "\"+\""}, "Superscript"], 
+            StripOnInput -> False, FontWeight -> Bold], 
+           StyleBox[TemplateBox[{"4", "\"-\""}, "Superscript"], 
+            StripOnInput -> False, FontWeight -> Bold]}, 
+          {TemplateBox[{"\"A\"", "\"1\"", "\"+\""}, "Subsuperscript"], "1", 
+           "0", "0", "0", "0", "0", "0", "0", "1", "0"}, 
+          {TemplateBox[{"\"A\"", "\"1\"", "\"-\""}, "Subsuperscript"], "0", 
+           "1", "0", "0", "0", "0", "0", "0", "0", "1"}, 
+          {TemplateBox[{"\"A\"", "\"2\"", "\"+\""}, "Subsuperscript"], "0", 
+           "0", "0", "0", "0", "0", "1", "0", "0", "0"}, 
+          {TemplateBox[{"\"A\"", "\"2\"", "\"-\""}, "Subsuperscript"], "0", 
+           "0", "0", "0", "0", "0", "0", "1", "0", "0"}, 
+          {TemplateBox[{"\"E\"", "\"+\""}, "Superscript"], "0", "0", "0", 
+           "0", "1", "0", "0", "0", "1", "0"}, 
+          {TemplateBox[{"\"E\"", "\"-\""}, "Superscript"], "0", "0", "0", 
+           "0", "0", "1", "0", "0", "0", "1"}, 
+          {TemplateBox[{"\"T\"", "\"1\"", "\"+\""}, "Subsuperscript"], "0", 
+           "0", "1", "0", "0", "0", "1", "0", "1", "0"}, 
+          {TemplateBox[{"\"T\"", "\"1\"", "\"-\""}, "Subsuperscript"], "0", 
+           "0", "0", "1", "0", "0", "0", "1", "0", "1"}, 
+          {TemplateBox[{"\"T\"", "\"2\"", "\"+\""}, "Subsuperscript"], "0", 
+           "0", "0", "0", "1", "0", "1", "0", "1", "0"}, 
+          {TemplateBox[{"\"T\"", "\"2\"", "\"-\""}, "Subsuperscript"], "0", 
+           "0", "0", "0", "0", "1", "0", "1", "0", "1"}}, 
+         AutoDelete -> False, BaseStyle -> {FontFamily -> "Times", 
+           FontSize -> 14}, GridBoxAlignment -> {"Columns" -> {{Center}}}, 
+         GridBoxBackground -> {"Columns" -> {{None}}, 
+           "Rows" -> {GrayLevel[0.93], {GrayLevel[1], GrayLevel[0.98]}}}, 
+         GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+         GridBoxItemSize -> {"Columns" -> {{Automatic}}, 
+           "Rows" -> {{Automatic}}}, GridBoxSpacings -> 
+          {"Columns" -> {{1.2}}, "Rows" -> {{0.7}}}], "Grid"]], "Output", 
+      CellChangeTimes -> {3.997884788375145*^9}, CellLabel -> "Out[9]=", 
+      ExpressionUUID -> "2301a99a-dd41-4117-882b-95db6b8ac430"]}, Open]], 
+  Cell[CellGroupData[
+    {Cell[BoxData[RowBox[{RowBox[{"(*", " ", RowBox[
+            {RowBox[{RowBox[{"Moving", " ", RowBox[{"frame", ":", " ", 
+                   "p"}]}], " ", "=", " ", RowBox[{"(", RowBox[{"0", ",", 
+                   "0", ",", "1"}], ")"}]}], ",", " ", 
+             RowBox[{"J", " ", "<=", " ", "3."}]}], " ", "*)"}], 
+         "\[IndentingNewLine]", RowBox[{"showSubduction", "[", 
+           RowBox[{RowBox[{"{", RowBox[{"0", ",", " ", "0", ",", " ", "1"}], 
+               "}"}], ",", " ", "3"}], "]"}]}]], "Input", 
+      CellLabel -> "In[10]:=", ExpressionUUID -> 
+       "eb31a09f-49f5-41eb-b413-938c1d8acca6"], 
+     Cell[BoxData[TagBox[GridBox[{{StyleBox[TemplateBox[{"\"Irrep / \"", 
+              TemplateBox[{"\"J\"", "\"P\""}, "Superscript", SyntaxForm -> 
+                SuperscriptBox]}, "RowDefault"], StripOnInput -> False, 
+            FontWeight -> Bold], StyleBox[TemplateBox[{"0", "\"+\""}, 
+             "Superscript"], StripOnInput -> False, FontWeight -> Bold], 
+           StyleBox[TemplateBox[{"0", "\"-\""}, "Superscript"], 
+            StripOnInput -> False, FontWeight -> Bold], 
+           StyleBox[TemplateBox[{"1", "\"+\""}, "Superscript"], 
+            StripOnInput -> False, FontWeight -> Bold], 
+           StyleBox[TemplateBox[{"1", "\"-\""}, "Superscript"], 
+            StripOnInput -> False, FontWeight -> Bold], 
+           StyleBox[TemplateBox[{"2", "\"+\""}, "Superscript"], 
+            StripOnInput -> False, FontWeight -> Bold], 
+           StyleBox[TemplateBox[{"2", "\"-\""}, "Superscript"], 
+            StripOnInput -> False, FontWeight -> Bold], 
+           StyleBox[TemplateBox[{"3", "\"+\""}, "Superscript"], 
+            StripOnInput -> False, FontWeight -> Bold], 
+           StyleBox[TemplateBox[{"3", "\"-\""}, "Superscript"], 
+            StripOnInput -> False, FontWeight -> Bold]}, 
+          {SubscriptBox["\"A\"", "\"1\""], "1", "0", "0", "1", "1", "0", "0", 
+           "1"}, {SubscriptBox["\"A\"", "\"2\""], "0", "1", "1", "0", "0", 
+           "1", "1", "0"}, {SubscriptBox["\"B\"", "\"1\""], "0", "0", "0", 
+           "0", "1", "1", "1", "1"}, {SubscriptBox["\"B\"", "\"2\""], "0", 
+           "0", "0", "0", "1", "1", "1", "1"}, {SubscriptBox["\"E\"", 
+            "\"2\""], "0", "0", "1", "1", "1", "1", "2", "2"}}, 
+         AutoDelete -> False, BaseStyle -> {FontFamily -> "Times", 
+           FontSize -> 14}, GridBoxAlignment -> {"Columns" -> {{Center}}}, 
+         GridBoxBackground -> {"Columns" -> {{None}}, 
+           "Rows" -> {GrayLevel[0.93], {GrayLevel[1], GrayLevel[0.98]}}}, 
+         GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+         GridBoxItemSize -> {"Columns" -> {{Automatic}}, 
+           "Rows" -> {{Automatic}}}, GridBoxSpacings -> 
+          {"Columns" -> {{1.2}}, "Rows" -> {{0.7}}}], "Grid"]], "Output", 
+      CellChangeTimes -> {3.997884796700528*^9}, CellLabel -> "Out[10]=", 
+      ExpressionUUID -> "beab75e6-31c0-496a-973c-d8213aa79a35"]}, Open]], 
+  Cell[CellGroupData[
+    {Cell[BoxData[RowBox[{RowBox[{"(*", " ", 
+           "Moving frame: C2v; (0,n,n); J <= 3.", " ", 
+           "*)"}], "\[IndentingNewLine]", RowBox[{"showSubduction", "[", 
+           RowBox[{RowBox[{"{", RowBox[{"0", ",", "1", ",", "1"}], "}"}], 
+             ",", "3"}], "]"}]}]], "Input"], 
+     Cell[BoxData[TagBox[GridBox[{{StyleBox[TemplateBox[{"\"Irrep / \"", 
+              TemplateBox[{"\"J\"", "\"P\""}, "Superscript", SyntaxForm -> 
+                SuperscriptBox]}, "RowDefault"], Bold, StripOnInput -> 
+             False], StyleBox[TemplateBox[{"0", "\"+\""}, "Superscript", 
+             SyntaxForm -> SuperscriptBox], Bold, StripOnInput -> False], 
+           StyleBox[TemplateBox[{"0", "\"-\""}, "Superscript", 
+             SyntaxForm -> SuperscriptBox], Bold, StripOnInput -> False], 
+           StyleBox[TemplateBox[{"1", "\"+\""}, "Superscript", 
+             SyntaxForm -> SuperscriptBox], Bold, StripOnInput -> False], 
+           StyleBox[TemplateBox[{"1", "\"-\""}, "Superscript", 
+             SyntaxForm -> SuperscriptBox], Bold, StripOnInput -> False], 
+           StyleBox[TemplateBox[{"2", "\"+\""}, "Superscript", 
+             SyntaxForm -> SuperscriptBox], Bold, StripOnInput -> False], 
+           StyleBox[TemplateBox[{"2", "\"-\""}, "Superscript", 
+             SyntaxForm -> SuperscriptBox], Bold, StripOnInput -> False], 
+           StyleBox[TemplateBox[{"3", "\"+\""}, "Superscript", 
+             SyntaxForm -> SuperscriptBox], Bold, StripOnInput -> False], 
+           StyleBox[TemplateBox[{"3", "\"-\""}, "Superscript", 
+             SyntaxForm -> SuperscriptBox], Bold, StripOnInput -> False]}, 
+          {SubscriptBox["\"A\"", "\"1\""], "1", "0", "0", "1", "2", "1", "1", 
+           "2"}, {SubscriptBox["\"A\"", "\"2\""], "0", "1", "1", "0", "1", 
+           "2", "2", "1"}, {SubscriptBox["\"B\"", "\"1\""], "0", "0", "1", 
+           "1", "1", "1", "2", "2"}, {SubscriptBox["\"B\"", "\"2\""], "0", 
+           "0", "1", "1", "1", "1", "2", "2"}}, GridBoxAlignment -> 
+          {"Columns" -> {{Center}}}, AutoDelete -> False, 
+         GridBoxBackground -> {"Columns" -> {{None}}, 
+           "Rows" -> {GrayLevel[0.93], {GrayLevel[1], GrayLevel[0.98]}}}, 
+         GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+         GridBoxItemSize -> {"Columns" -> {{Automatic}}, 
+           "Rows" -> {{Automatic}}}, GridBoxSpacings -> 
+          {"Columns" -> {{1.2}}, "Rows" -> {{0.7}}}, BaseStyle -> 
+          {FontFamily -> "Times", FontSize -> 14}], "Grid"]], "Output"]}, 
+    Open]], Cell[CellGroupData[
+    {Cell[BoxData[RowBox[{RowBox[{"(*", " ", 
+           "Moving frame: C3v; (n,n,n); J <= 3.", " ", 
+           "*)"}], "\[IndentingNewLine]", RowBox[{"showSubduction", "[", 
+           RowBox[{RowBox[{"{", RowBox[{"1", ",", "1", ",", "1"}], "}"}], 
+             ",", "3"}], "]"}]}]], "Input"], 
+     Cell[BoxData[TagBox[GridBox[{{StyleBox[TemplateBox[{"\"Irrep / \"", 
+              TemplateBox[{"\"J\"", "\"P\""}, "Superscript", SyntaxForm -> 
+                SuperscriptBox]}, "RowDefault"], Bold, StripOnInput -> 
+             False], StyleBox[TemplateBox[{"0", "\"+\""}, "Superscript", 
+             SyntaxForm -> SuperscriptBox], Bold, StripOnInput -> False], 
+           StyleBox[TemplateBox[{"0", "\"-\""}, "Superscript", 
+             SyntaxForm -> SuperscriptBox], Bold, StripOnInput -> False], 
+           StyleBox[TemplateBox[{"1", "\"+\""}, "Superscript", 
+             SyntaxForm -> SuperscriptBox], Bold, StripOnInput -> False], 
+           StyleBox[TemplateBox[{"1", "\"-\""}, "Superscript", 
+             SyntaxForm -> SuperscriptBox], Bold, StripOnInput -> False], 
+           StyleBox[TemplateBox[{"2", "\"+\""}, "Superscript", 
+             SyntaxForm -> SuperscriptBox], Bold, StripOnInput -> False], 
+           StyleBox[TemplateBox[{"2", "\"-\""}, "Superscript", 
+             SyntaxForm -> SuperscriptBox], Bold, StripOnInput -> False], 
+           StyleBox[TemplateBox[{"3", "\"+\""}, "Superscript", 
+             SyntaxForm -> SuperscriptBox], Bold, StripOnInput -> False], 
+           StyleBox[TemplateBox[{"3", "\"-\""}, "Superscript", 
+             SyntaxForm -> SuperscriptBox], Bold, StripOnInput -> False]}, 
+          {SubscriptBox["\"A\"", "\"1\""], "1", "0", "0", "1", "1", "0", "1", 
+           "2"}, {SubscriptBox["\"A\"", "\"2\""], "0", "1", "1", "0", "0", 
+           "1", "2", "1"}, {SubscriptBox["\"E\"", "\"2\""], "0", "0", "1", 
+           "1", "2", "2", "2", "2"}}, GridBoxAlignment -> 
+          {"Columns" -> {{Center}}}, AutoDelete -> False, 
+         GridBoxBackground -> {"Columns" -> {{None}}, 
+           "Rows" -> {GrayLevel[0.93], {GrayLevel[1], GrayLevel[0.98]}}}, 
+         GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+         GridBoxItemSize -> {"Columns" -> {{Automatic}}, 
+           "Rows" -> {{Automatic}}}, GridBoxSpacings -> 
+          {"Columns" -> {{1.2}}, "Rows" -> {{0.7}}}, BaseStyle -> 
+          {FontFamily -> "Times", FontSize -> 14}], "Grid"]], "Output"]}, 
+    Open]], Cell[CellGroupData[
+    {Cell[BoxData[RowBox[{RowBox[{"(*", " ", 
+           "Moving frame: C2nm0; (n,m,0), n != m; J <= \
+3.", " ", "*)"}], "\[IndentingNewLine]", RowBox[{"showSubduction", "[", 
+           RowBox[{RowBox[{"{", RowBox[{"1", ",", "2", ",", "0"}], "}"}], 
+             ",", "3"}], "]"}]}]], "Input"], 
+     Cell[BoxData[TagBox[GridBox[{{StyleBox[TemplateBox[{"\"Irrep / \"", 
+              TemplateBox[{"\"J\"", "\"P\""}, "Superscript", SyntaxForm -> 
+                SuperscriptBox]}, "RowDefault"], Bold, StripOnInput -> 
+             False], StyleBox[TemplateBox[{"0", "\"+\""}, "Superscript", 
+             SyntaxForm -> SuperscriptBox], Bold, StripOnInput -> False], 
+           StyleBox[TemplateBox[{"0", "\"-\""}, "Superscript", 
+             SyntaxForm -> SuperscriptBox], Bold, StripOnInput -> False], 
+           StyleBox[TemplateBox[{"1", "\"+\""}, "Superscript", 
+             SyntaxForm -> SuperscriptBox], Bold, StripOnInput -> False], 
+           StyleBox[TemplateBox[{"1", "\"-\""}, "Superscript", 
+             SyntaxForm -> SuperscriptBox], Bold, StripOnInput -> False], 
+           StyleBox[TemplateBox[{"2", "\"+\""}, "Superscript", 
+             SyntaxForm -> SuperscriptBox], Bold, StripOnInput -> False], 
+           StyleBox[TemplateBox[{"2", "\"-\""}, "Superscript", 
+             SyntaxForm -> SuperscriptBox], Bold, StripOnInput -> False], 
+           StyleBox[TemplateBox[{"3", "\"+\""}, "Superscript", 
+             SyntaxForm -> SuperscriptBox], Bold, StripOnInput -> False], 
+           StyleBox[TemplateBox[{"3", "\"-\""}, "Superscript", 
+             SyntaxForm -> SuperscriptBox], Bold, StripOnInput -> False]}, 
+          {"\"A\"", "1", "0", "1", "2", "3", "2", "3", "4"}, 
+          {"\"B\"", "0", "1", "2", "1", "2", "3", "4", "3"}}, 
+         GridBoxAlignment -> {"Columns" -> {{Center}}}, AutoDelete -> False, 
+         GridBoxBackground -> {"Columns" -> {{None}}, 
+           "Rows" -> {GrayLevel[0.93], {GrayLevel[1], GrayLevel[0.98]}}}, 
+         GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+         GridBoxItemSize -> {"Columns" -> {{Automatic}}, 
+           "Rows" -> {{Automatic}}}, GridBoxSpacings -> 
+          {"Columns" -> {{1.2}}, "Rows" -> {{0.7}}}, BaseStyle -> 
+          {FontFamily -> "Times", FontSize -> 14}], "Grid"]], "Output"]}, 
+    Open]], Cell[CellGroupData[
+    {Cell[BoxData[RowBox[{RowBox[{"(*", " ", 
+           "Moving frame: C2nnm; (n,n,m), n != m; J <= \
+3.", " ", "*)"}], "\[IndentingNewLine]", RowBox[{"showSubduction", "[", 
+           RowBox[{RowBox[{"{", RowBox[{"1", ",", "1", ",", "2"}], "}"}], 
+             ",", "3"}], "]"}]}]], "Input"], 
+     Cell[BoxData[TagBox[GridBox[{{StyleBox[TemplateBox[{"\"Irrep / \"", 
+              TemplateBox[{"\"J\"", "\"P\""}, "Superscript", SyntaxForm -> 
+                SuperscriptBox]}, "RowDefault"], Bold, StripOnInput -> 
+             False], StyleBox[TemplateBox[{"0", "\"+\""}, "Superscript", 
+             SyntaxForm -> SuperscriptBox], Bold, StripOnInput -> False], 
+           StyleBox[TemplateBox[{"0", "\"-\""}, "Superscript", 
+             SyntaxForm -> SuperscriptBox], Bold, StripOnInput -> False], 
+           StyleBox[TemplateBox[{"1", "\"+\""}, "Superscript", 
+             SyntaxForm -> SuperscriptBox], Bold, StripOnInput -> False], 
+           StyleBox[TemplateBox[{"1", "\"-\""}, "Superscript", 
+             SyntaxForm -> SuperscriptBox], Bold, StripOnInput -> False], 
+           StyleBox[TemplateBox[{"2", "\"+\""}, "Superscript", 
+             SyntaxForm -> SuperscriptBox], Bold, StripOnInput -> False], 
+           StyleBox[TemplateBox[{"2", "\"-\""}, "Superscript", 
+             SyntaxForm -> SuperscriptBox], Bold, StripOnInput -> False], 
+           StyleBox[TemplateBox[{"3", "\"+\""}, "Superscript", 
+             SyntaxForm -> SuperscriptBox], Bold, StripOnInput -> False], 
+           StyleBox[TemplateBox[{"3", "\"-\""}, "Superscript", 
+             SyntaxForm -> SuperscriptBox], Bold, StripOnInput -> False]}, 
+          {"\"A\"", "1", "0", "1", "2", "3", "2", "3", "4"}, 
+          {"\"B\"", "0", "1", "2", "1", "2", "3", "4", "3"}}, 
+         GridBoxAlignment -> {"Columns" -> {{Center}}}, AutoDelete -> False, 
+         GridBoxBackground -> {"Columns" -> {{None}}, 
+           "Rows" -> {GrayLevel[0.93], {GrayLevel[1], GrayLevel[0.98]}}}, 
+         GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+         GridBoxItemSize -> {"Columns" -> {{Automatic}}, 
+           "Rows" -> {{Automatic}}}, GridBoxSpacings -> 
+          {"Columns" -> {{1.2}}, "Rows" -> {{0.7}}}, BaseStyle -> 
+          {FontFamily -> "Times", FontSize -> 14}], "Grid"]], "Output"]}, 
+    Open]], Cell[CellGroupData[
+    {Cell[BoxData[RowBox[{RowBox[{"(*", " ", "Moving frame: C1; (n,m,k), all \
+components distinct; J <= 3.", " ", "*)"}], 
+         "\[IndentingNewLine]", RowBox[{"showSubduction", "[", 
+           RowBox[{RowBox[{"{", RowBox[{"1", ",", "2", ",", "3"}], "}"}], 
+             ",", "3"}], "]"}]}]], "Input"], 
+     Cell[BoxData[TagBox[GridBox[{{StyleBox[TemplateBox[{"\"Irrep / \"", 
+              TemplateBox[{"\"J\"", "\"P\""}, "Superscript", SyntaxForm -> 
+                SuperscriptBox]}, "RowDefault"], Bold, StripOnInput -> 
+             False], StyleBox[TemplateBox[{"0", "\"+\""}, "Superscript", 
+             SyntaxForm -> SuperscriptBox], Bold, StripOnInput -> False], 
+           StyleBox[TemplateBox[{"0", "\"-\""}, "Superscript", 
+             SyntaxForm -> SuperscriptBox], Bold, StripOnInput -> False], 
+           StyleBox[TemplateBox[{"1", "\"+\""}, "Superscript", 
+             SyntaxForm -> SuperscriptBox], Bold, StripOnInput -> False], 
+           StyleBox[TemplateBox[{"1", "\"-\""}, "Superscript", 
+             SyntaxForm -> SuperscriptBox], Bold, StripOnInput -> False], 
+           StyleBox[TemplateBox[{"2", "\"+\""}, "Superscript", 
+             SyntaxForm -> SuperscriptBox], Bold, StripOnInput -> False], 
+           StyleBox[TemplateBox[{"2", "\"-\""}, "Superscript", 
+             SyntaxForm -> SuperscriptBox], Bold, StripOnInput -> False], 
+           StyleBox[TemplateBox[{"3", "\"+\""}, "Superscript", 
+             SyntaxForm -> SuperscriptBox], Bold, StripOnInput -> False], 
+           StyleBox[TemplateBox[{"3", "\"-\""}, "Superscript", 
+             SyntaxForm -> SuperscriptBox], Bold, StripOnInput -> False]}, 
+          {"\"A\"", "1", "1", "3", "3", "5", "5", "7", "7"}}, 
+         GridBoxAlignment -> {"Columns" -> {{Center}}}, AutoDelete -> False, 
+         GridBoxBackground -> {"Columns" -> {{None}}, 
+           "Rows" -> {GrayLevel[0.93], {GrayLevel[1], GrayLevel[0.98]}}}, 
+         GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+         GridBoxItemSize -> {"Columns" -> {{Automatic}}, 
+           "Rows" -> {{Automatic}}}, GridBoxSpacings -> 
+          {"Columns" -> {{1.2}}, "Rows" -> {{0.7}}}, BaseStyle -> 
+          {FontFamily -> "Times", FontSize -> 14}], "Grid"]], "Output"]}, 
+    Open]], Cell[CellGroupData[
+    {Cell[BoxData[RowBox[{RowBox[{"(*", " ", RowBox[
+            {RowBox[{"Center", "-", "of", "-", RowBox[{"mass", " ", 
+                 RowBox[{"multiplicity", ":", " ", RowBox[{"T1", "+", " ", 
+                     RowBox[{"occurs", " ", "twice", " ", "in", " ", 
+                       RowBox[{"J", "^", "P"}]}]}]}]}]}], " ", "=", " ", 
+             RowBox[{"5", "+", "."}]}], " ", "*)"}], "\[IndentingNewLine]", 
+         RowBox[{"SubductionMultiplicity", "[", 
+           RowBox[{RowBox[{"{", RowBox[{"0", ",", " ", "0", ",", " ", "0"}], 
+               "}"}], ",", " ", "\"T1+\"", ",", " ", "5", ",", " ", 
+             "\"+\""}], "]"}]}]], "Input", CellChangeTimes -> 
+       {{3.9978849130290537*^9, 3.9978849199461193*^9}}, 
+      ExpressionUUID -> "026c1a32-ce5e-404e-8e2e-f36906d61bb4"], 
+     Cell[BoxData["2"], "Output", CellChangeTimes -> {3.997884818733508*^9}, 
+      CellLabel -> "Out[11]=", ExpressionUUID -> 
+       "0443920e-8f99-4fa8-bdfb-4d2d1f836168"]}, Open]], 
+  Cell[CellGroupData[
+    {Cell[BoxData[RowBox[{RowBox[{"(*", " ", RowBox[
+            {RowBox[{"Moving", "-", RowBox[{"frame", " ", RowBox[
+                  {"multiplicity", ":", " ", RowBox[{"E2", " ", "occurs", 
+                     " ", "twice", " ", "in", " ", RowBox[{"J", "^", 
+                       "P"}]}]}]}]}], " ", "=", " ", 
+             RowBox[{"3", "+", "."}]}], " ", "*)"}], "\[IndentingNewLine]", 
+         RowBox[{"SubductionMultiplicity", "[", 
+           RowBox[{RowBox[{"{", RowBox[{"0", ",", " ", "0", ",", " ", "1"}], 
+               "}"}], ",", " ", "\"E2\"", ",", " ", "3", ",", " ", "\"+\""}], 
+           "]"}]}]], "Input", CellChangeTimes -> 
+       {{3.9978849163193607*^9, 3.997884916677351*^9}}, 
+      ExpressionUUID -> "9c0dec83-76c9-4166-b9f8-984d816ea5fd"], 
+     Cell[BoxData["2"], "Output", CellChangeTimes -> {3.997884819960939*^9}, 
+      CellLabel -> "Out[12]=", ExpressionUUID -> 
+       "50ac940a-7900-4e9e-b172-0ad003694a40"]}, Open]]}, 
+ WindowSize -> {1508, 868}, WindowMargins -> 
+  {{92, Automatic}, {Automatic, 50}}, FrontEndVersion -> 
+  "13.2 for Mac OS X ARM (64-bit) (2022\:5e7411\:670818\:65e5)", 
+ StyleDefinitions -> "Default.nb", ExpressionUUID -> 
+  "ac44d936-4143-4797-8be3-6a5d934123bd"]
