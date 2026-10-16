@@ -96,7 +96,7 @@ If[i===21,mat={{1/2,-((I Sqrt[3])/2)},{(I Sqrt[3])/2,-(1/2)}}];
 If[i===17,mat={{1/2,(I Sqrt[3])/2},{-((I Sqrt[3])/2),-(1/2)}}];
 matele=mat[[a,b]]]]];
 (* [n,m,0] and [n,n,m] ]*)
-(* 1:0; Subscript[C, z]: 24:\[Pi] and 1:0; Subscript[C, xy]: 17:\[Pi] *)
+(* 1:0; Subscript[C, z]: 24:\[Pi] and 1:0; Subscript[C, xy]: 19:\[Pi] *)
 If[group==="C2nm0" || group==="C2nnm",
 If[rep==="A",matele=1];
 If[rep==="B",matele=If[inv===0,1,-1]]];
@@ -146,7 +146,7 @@ If[rep==="A1",matele=1];
 If[rep==="A2",matele=If[MemberQ[{1,40,16,25},i],1,-1]];
 If[rep==="B1",matele=If[MemberQ[{1,46,22,25},i],1,-1]];
 If[rep==="B2",matele=If[MemberQ[{1,41,17,25},i],1,-1]];
-If[rep==="G1",matele=ODrep["G1",i,a,b];If[MemberQ[{41,17,46,22},i],1,-1]];
+If[rep==="G1",matele=ODrep["G1",i,a,b]];
 ];
 (* [n,n,n] *)
 If[group==="C3vD",
@@ -172,7 +172,7 @@ If[MemberQ[{21,45},i],mat=-X[6]];
 matele=mat[[a,b]]];
 If[rep==="G1",
 matele=ODrep["G1",i,a,b];
-If[MemberQ[{1,19,21,43,45,17},i],matele=-matele]];
+If[inv===1,matele=-matele]];
 ];
 (* [n,m,0] *)
 If[group==="C2nm0D",
@@ -182,12 +182,12 @@ If[rep==="K1",
 If[i===1,matele=1];
 If[i===25,matele=-1];
 If[i===48,matele=I];
-If[i===24,i],matele=-I];
+If[i===24,matele=-I]];
 If[rep==="K2",
 If[i===1,matele=1];
 If[i===25,matele=-1];
 If[i===24,matele=I];
-If[i===48,i],matele=-I]];
+If[i===48,matele=-I]]];
 (* [n,n,m] *)
 If[group==="C2nnmD",
 If[rep==="A1",matele=1];
@@ -195,17 +195,17 @@ If[rep==="A2",matele=If[MemberQ[{1,25},i],1,-1]];
 If[rep==="K1",
 If[i===1,matele=1];
 If[i===25,matele=-1];
-If[i===41,matele=I];
-If[i===17,i],matele=-I];
+If[i===43,matele=I];
+If[i===19,matele=-I]];
 If[rep==="K2",
 If[i===1,matele=1];
 If[i===25,matele=-1];
-If[i===17,matele=I];
-If[i===41,i],matele=-I]];
-(* [n,n,p] *)
+If[i===19,matele=I];
+If[i===43,matele=-I]]];
+(* [n,m,p] *)
 If[group==="C1D",
 If[rep==="A",matele=1];
-If[rep==="K",matele=If[i===1,i],1,-1]];
+If[rep==="K",matele=If[i===1,1,-1]]];
 If[matele===10000,Throw["Wrong irrep."]];
 Return[matele];
 ];
