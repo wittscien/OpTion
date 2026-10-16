@@ -22,7 +22,8 @@ If[newp[[1]]!=0 || newp[[2]]!=0,
 (* Should be very careful at special cases when only z!=0 *)
 \[Theta]=ToSphericalCoordinates[newp][[2]];
 \[Phi]=ToSphericalCoordinates[newp][[3]];,If[newp[[3]]>0,\[Theta]=0;\[Phi]=0,\[Theta]=\[Pi];\[Phi]=0]];
-beforeprojection+=Conjugate[SphericalHarmonicY[L,mL,\[Theta],\[Phi]]]H[1,s1,ms1,p1][newp]H[2,s2,ms2,p2][-newp],{i,1,24}];
+(* Pair opposite momenta with orbital parity (-1)^L. *)
+beforeprojection+=Conjugate[SphericalHarmonicY[L,mL,\[Theta],\[Phi]]](H[1,s1,ms1,p1][newp]H[2,s2,ms2,p2][-newp]+(-1)^L H[1,s1,ms1,p1][-newp]H[2,s2,ms2,p2][newp])/2,{i,1,24}];
 ope+=ClebschGordan[{L,mL},{S,mS},{J,mJ}] ClebschGordan[{s1,ms1},{s2,ms2},{S,mS}] beforeprojection],{ms1,-s1,s1}],{ms2,-s2,s2}],{mS,-S,S}],{mL,-L,L}];
 Return[ope];
 ];
@@ -41,7 +42,8 @@ If[newp[[1]]!=0 || newp[[2]]!=0,
 (* Should be very careful at special cases when only z!=0 *)
 \[Theta]=ToSphericalCoordinates[newp][[2]];
 \[Phi]=ToSphericalCoordinates[newp][[3]];,If[newp[[3]]>0,\[Theta]=0;\[Phi]=0,\[Theta]=\[Pi];\[Phi]=0]];
-beforeprojection+=Conjugate[SphericalHarmonicY[L,mL,\[Theta],\[Phi]]]H[1,s1,ms1,p1][newp]H[2,s2,ms2,p2][-newp],{i,1,48}];
+(* Pair opposite momenta with orbital parity (-1)^L. *)
+beforeprojection+=Conjugate[SphericalHarmonicY[L,mL,\[Theta],\[Phi]]](H[1,s1,ms1,p1][newp]H[2,s2,ms2,p2][-newp]+(-1)^L H[1,s1,ms1,p1][-newp]H[2,s2,ms2,p2][newp])/2,{i,1,48}];
 ope+=ClebschGordan[{L,mL},{S,mS},{J,mJ}] ClebschGordan[{s1,ms1},{s2,ms2},{S,mS}] beforeprojection],{ms1,-s1,s1}],{ms2,-s2,s2}],{mS,-S,S}],{mL,-L,L}];
 Return[ope];
 ];
