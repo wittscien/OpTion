@@ -52,6 +52,7 @@ repparity=If[StringPart[rep,-1]==="+",1,If[StringPart[rep,-1]==="-",-1,Print["wr
 P=If[TG==="S" || TG==="A",1,If[TG==="P" || TG==="V",-1,0]];
 PGD=P (-1)^ND; (* Parity of Gamma\[Cross]D *)
 If[repparity=!=PGD,Print["Wrong parity"];Return[0]];
+If[!KeyExistsQ[subduction,{J,repO}],Print["This J/irrep pair is not in the subduction table. Use ProjectionOperator1 or OneHadronOperatorAll."];Return[$Failed]];
 ope=0;
 Do[ope+=subduction[{J,repO}][[r,-M+J+1]]OJM[J,M,JD,J13,TG,ND],{M,-J,J}];
 ope=NCDSimplify[ope];
@@ -61,6 +62,7 @@ Return[ope];
 
 (* Moving frame: Subsuperscript[O, \[CapitalLambda],\[Mu], [J,|\[Lambda]|]] *)
 OSub[group_,rep_,r_,J_, \[Lambda]_,JD_,J13_,TG_,ND_]:=Module[{ope,P,\[Eta]tilde,PGD},
+If[!MemberQ[{"C4v","C2v","C3v"},group],Print["Helicity subduction is not implemented for ",group,". Use ProjectionOperator1 or OneHadronOperatorAll."];Return[$Failed]];
 If[J<Abs[\[Lambda]],Print["Wrong: J < \[Lambda]"];Return[0]];
 P=If[TG==="S" || TG==="A",1,If[TG==="P" || TG==="V",-1,0]];
 PGD=P (-1)^ND; (* Parity of Gamma\[Cross]D *)

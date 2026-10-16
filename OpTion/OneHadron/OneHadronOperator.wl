@@ -43,6 +43,7 @@ Return[ope];
 OneHadronOperatorHelicityAll[ptot_,rep_,r_,MaxND_]:=Module[{group,JG,JD,J13,repparity,repO,P,PGD,opList,op},
 (*Print[group,": ",rep,": ","##################################################################################################"];*)
 group=MomToGroup[ptot];
+If[!MemberQ[{"Oh","C4v","C2v","C3v"},group],Print["Helicity subduction is not implemented for ",group,". Use OneHadronOperatorAll."];Return[$Failed]];
 opList={};
 If[group==="Oh",
 (* Rest frame *)
