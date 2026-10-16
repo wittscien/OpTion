@@ -14,8 +14,8 @@ Begin["`NHadronOperator`"];
 NHadronOperator[ptot_,rep_,r_,momTuple_,parTuple_,msTuple_]:=Module[{group,op,Npar,sTuple,pTuple,parTupleOrder},
 (* Sanity check *)
 Npar=Length[momTuple];
-Assert[N===Length[parTuple]];
-Assert[N===Length[msTuple]];
+Assert[Npar===Length[parTuple]];
+Assert[Npar===Length[msTuple]];
 Assert[ptot===Total[momTuple]];
 (* Extract the particle information and reorganize *)
 sTuple=ConstantArray[0,Npar];
