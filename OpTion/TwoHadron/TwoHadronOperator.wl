@@ -1,6 +1,6 @@
 (* ::Package:: *)
 
-TwoHadronOperator::usage = "TwoHadronOperator[ptot,rep,r,mom,par1,ms1,par2,ms2] generates two-hadron operators by projection.";
+TwoHadronOperator::usage = "TwoHadronOperator[ptot,rep,r,mom,par1,par2,ms1,ms2] generates two-hadron operators by projection.";
 TwoHadronOperatorPartialWave::usage = "TwoHadronOperatorPartialWave[ptot,rep,r,mom,J,L,S,par1,par2] generates two-hadron operators by partial wave coupling."
 TwoHadronOperatorAll::usage = "TwoHadronOperatorAll[ptot,rep,r,maxmom,par1,par2] generates all possible two-hadron operators by projection.";
 TwoHadronOperatorPartialWaveAll::usage = "TwoHadronOperatorPartialWaveAll[ptot,rep,r,maxmom,par1,par2,L,printJLS] generates all possible two-hadron operators by partial wave coupling.";

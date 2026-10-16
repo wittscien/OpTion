@@ -105,6 +105,8 @@ factors=List@@opmonomial;
 (* Extract coefficients *)
 coeff=Times@@Select[factors,NumericQ];
 factors=Select[factors,!NumericQ[#]&];
+(* The second character in P1, V1x, etc. is the particle index. *)
+factors=SortBy[factors,StringTake[Head[#],{2}]&];
 If[!NumberQ[coeff],coeff=N[coeff]];
 coeffText=StringReplace[ToString[InputForm[coeff,NumberMarks->False]],{"I"->"1j","*^"->"e"}];
 factorsList1=factors[[1]]/.s_String[p_]:>{s,Replace[p,Reverse/@symbols]};
@@ -116,7 +118,8 @@ Return[OpPythonMonomial];
 ];
 
 OperatorToPython[expr_]:=Module[{opsList,OpExpression},
-opsList=Which[Head[expr]===Plus,List@@expr,Head[expr]===Times,{expr},True,Return[$Failed]];
+opsList=Expand[expr];
+opsList=Which[Head[opsList]===Plus,List@@opsList,Head[opsList]===Times,{opsList},True,Return[$Failed]];
 opsList=opsList/.waverulesText;
 OpExpression=StringJoin["[",StringRiffle[parseTerm/@opsList,", "],"]"];
 Return[OpExpression];
