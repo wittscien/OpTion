@@ -100,25 +100,24 @@ Return[MatrixRank[augmentedMatrix]>MatrixRank[coeffMatrix]];
 (* 2025.12.21: translate an operator to a Python input *)
 (* Only two-body operators for now *)
 opMap=<|"P1"->5,"P2"->5,"S1"->0,"S2"->0,"V1x"->1,"V1y"->2,"V1z"->3,"V2x"->1,"V2y"->2,"V2z"->3,"A1x"->12,"A1y"->13,"A1z"->14,"A2x"->12,"A2y"->13,"A2z"->14|>;
-parseTerm[opmonomial_Times]:=Module[{factors,coeff,factorsList1,gm1,mom1,factorsList2,gm2,mom2,OpPythonMonomial},
+parseTerm[opmonomial_Times]:=Module[{factors,coeff,coeffText,factorsList1,gm1,mom1,factorsList2,gm2,mom2,OpPythonMonomial},
 factors=List@@opmonomial;
 (* Extract coefficients *)
-If[NumberQ[factors[[1]]],
-coeff=factors[[1]];
-factors=factors[[2;;]],
-coeff=1;
-];
-factorsList1=factors[[1]]/.s_String[v_List]:>{s,v};
+coeff=Times@@Select[factors,NumericQ];
+factors=Select[factors,!NumericQ[#]&];
+If[!NumberQ[coeff],coeff=N[coeff]];
+coeffText=StringReplace[ToString[InputForm[coeff,NumberMarks->False]],{"I"->"1j","*^"->"e"}];
+factorsList1=factors[[1]]/.s_String[p_]:>{s,Replace[p,Reverse/@symbols]};
 {gm1,mom1}=factorsList1;
-factorsList2=factors[[2]]/.s_String[v_List]:>{s,v};
+factorsList2=factors[[2]]/.s_String[p_]:>{s,Replace[p,Reverse/@symbols]};
 {gm2,mom2}=factorsList2;
-OpPythonMonomial="(("<>ToString[mom1[[1]]]<>","<>ToString[mom1[[2]]]<>","<>ToString[mom1[[3]]]<>"),"<>ToString[coeff]<>",("<>ToString[opMap[gm1]]<>","<>ToString[opMap[gm2]]<>"))";
+OpPythonMonomial="(("<>ToString[mom1[[1]]]<>","<>ToString[mom1[[2]]]<>","<>ToString[mom1[[3]]]<>"),"<>coeffText<>",("<>ToString[opMap[gm1]]<>","<>ToString[opMap[gm2]]<>"))";
 Return[OpPythonMonomial];
 ];
 
 OperatorToPython[expr_]:=Module[{opsList,OpExpression},
 opsList=Which[Head[expr]===Plus,List@@expr,Head[expr]===Times,{expr},True,Return[$Failed]];
-opsList=opsList/.(Reverse/@symbols)/.waverulesText;
+opsList=opsList/.waverulesText;
 OpExpression=StringJoin["[",StringRiffle[parseTerm/@opsList,", "],"]"];
 Return[OpExpression];
 ];
