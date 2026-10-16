@@ -106,6 +106,7 @@ Print/@opList;
 
 PrintTwoHadronOperatorPartialWaveAll[ptot_,rep_,r_,maxmom_,par1_,par2_,L_,printPython_]:=Module[{JLSList,opList,PythonList},
 opList=TwoHadronOperatorPartialWaveAll[ptot,rep,r,maxmom,par1,par2,L,True];
+If[opList==={},Return[]];
 {JLSList,opList}=opList;
 If[printPython,
 PythonList=OperatorToPython/@opList;
