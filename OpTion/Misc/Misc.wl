@@ -86,7 +86,8 @@ If[Expand[newExpr]===0,Return[False]];
 (* MatrixRank refuses the empty matrix *)
 If[exprList==={},Return[True]];
 (* Extract all distinct monomials from exprList and newExpr *)
-allMonomials=DeleteCases[Union[ONormalize/@Flatten[MonomialList/@Join[exprList,{newExpr}],1]],0];
+allMonomials=Expand/@Join[exprList,{newExpr}];
+allMonomials=DeleteCases[Union[ONormalize/@Flatten[If[Head[#]===Plus,List@@#,{#}]&/@allMonomials,1]],0];
 (* Compute the coefficient matrix for the list with respect to the monomials *)
 coeffMatrix=Table[Coefficient[expr,mon],{expr,exprList},{mon,allMonomials}];
 (* Compute the coefficients for the new expression with respect to the monomials *)
