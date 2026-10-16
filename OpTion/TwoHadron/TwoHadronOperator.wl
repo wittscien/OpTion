@@ -87,7 +87,7 @@ opList={};
 JLSList={};
 Do[
 op=TwoHadronOperatorPartialWave[ptot,repO,r,mom,J,L,S,par1,par2];
-If[!MemberQ[opList,op] && op =!= 0,AppendTo[opList,op];AppendTo[JLSList,{J,L,S}]],{mom,momList},{S,Abs[s1-s2],s1+s2},{J,Abs[L-S],L+S}];
+If[!MemberQ[opList,op] && op =!= 0 && IsLinearlyIndependent[opList,op],AppendTo[opList,op];AppendTo[JLSList,{J,L,S}]],{mom,momList},{S,Abs[s1-s2],s1+s2},{J,Abs[L-S],L+S}];
 If[printJLS,Return[{JLSList,opList}],Return[opList]];
 ];
 (* Default is to print the JLS basis *)
