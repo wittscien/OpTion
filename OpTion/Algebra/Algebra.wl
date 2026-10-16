@@ -79,14 +79,15 @@ Subscript["\!\(\*SubscriptBox[\(A\), \(1\)]\)", "z"]->"A1z",
 Subscript["\!\(\*SubscriptBox[\(A\), \(2\)]\)", "x"]->"A2x",
 Subscript["\!\(\*SubscriptBox[\(A\), \(2\)]\)", "y"]->"A2y",
 Subscript["\!\(\*SubscriptBox[\(A\), \(2\)]\)", "z"]->"A2z",
-Subscript["\!\(\*SubscriptBox[\(N\), \(1\)]\)", (1/2)]->"N12",
-Subscript["\!\(\*SubscriptBox[\(N\), \(1\)]\)", (-1/2)]->"Nm12",
-Subscript["\!\(\*SubscriptBox[\(N\), \(2\)]\)", (1/2)]->"N12",
-Subscript["\!\(\*SubscriptBox[\(N\), \(2\)]\)", (-1/2)]->"Nm12",
-Subscript["\!\(\*SubscriptBox[\(M\), \(1\)]\)", (1/2)]->"M12",
-Subscript["\!\(\*SubscriptBox[\(M\), \(1\)]\)", (-1/2)]->"Mm12",
-Subscript["\!\(\*SubscriptBox[\(M\), \(2\)]\)", (1/2)]->"M12",
-Subscript["\!\(\*SubscriptBox[\(M\), \(2\)]\)", (-1/2)]->"Mm12"
+(* N1p12 means particle 1 with spin projection +1/2. *)
+Subscript["\!\(\*SubscriptBox[\(N\), \(1\)]\)", (1/2)]->"N1p12",
+Subscript["\!\(\*SubscriptBox[\(N\), \(1\)]\)", (-1/2)]->"N1m12",
+Subscript["\!\(\*SubscriptBox[\(N\), \(2\)]\)", (1/2)]->"N2p12",
+Subscript["\!\(\*SubscriptBox[\(N\), \(2\)]\)", (-1/2)]->"N2m12",
+Subscript["\!\(\*SubscriptBox[\(M\), \(1\)]\)", (1/2)]->"M1p12",
+Subscript["\!\(\*SubscriptBox[\(M\), \(1\)]\)", (-1/2)]->"M1m12",
+Subscript["\!\(\*SubscriptBox[\(M\), \(2\)]\)", (1/2)]->"M2p12",
+Subscript["\!\(\*SubscriptBox[\(M\), \(2\)]\)", (-1/2)]->"M2m12"
 };
 
 
