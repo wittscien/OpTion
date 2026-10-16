@@ -44,6 +44,7 @@ OneHadronOperatorHelicityAll[ptot_,rep_,r_,MaxND_]:=Module[{group,JG,JD,J13,repp
 (*Print[group,": ",rep,": ","##################################################################################################"];*)
 group=MomToGroup[ptot];
 If[!MemberQ[{"Oh","C4v","C2v","C3v"},group],Print["Helicity subduction is not implemented for ",group,". Use OneHadronOperatorAll."];Return[$Failed]];
+If[MaxND>1,Print["The helicity method only supports MaxND <= 1. Use OneHadronOperatorAll."];Return[$Failed]];
 opList={};
 If[group==="Oh",
 (* Rest frame *)
