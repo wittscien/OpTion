@@ -108,7 +108,7 @@ Return[opList];
 
 OneHadronOperator[rep_,r_,MaxND_]:=OneHadronOperator[{0,0,0},rep,r,MaxND];
 PrintOneHadronOperatorAll[ptot_,rep_,r_,MaxND_]:=Print/@OneHadronOperatorAll[ptot,rep,r,MaxND];
-PrintOneHadronOperatorHelicity[ptot_,rep_,r_,J_,\[Lambda]_,JD_,J13_,TG_,ND_]:=Print/@OneHadronOperatorHelicity[ptot,rep,r,J,\[Lambda],JD,J13,TG,ND];
+PrintOneHadronOperatorHelicity[ptot_,rep_,r_,J_,\[Lambda]_,JD_,J13_,TG_,ND_]:=Print[OneHadronOperatorHelicity[ptot,rep,r,J,\[Lambda],JD,J13,TG,ND]];
 
 
 End[];
