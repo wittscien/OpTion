@@ -13,9 +13,9 @@ Begin["`NHadronOperator`"];
 NHadronOperator[ptot_,rep_,r_,momTuple_,parTuple_,msTuple_]:=Module[{group,op,Npar,sTuple,pTuple,parTupleOrder},
 (* Sanity check *)
 Npar=Length[momTuple];
-Assert[Npar===Length[parTuple]];
-Assert[Npar===Length[msTuple]];
-Assert[ptot===Total[momTuple]];
+If[Npar=!=Length[parTuple],Print["momTuple and parTuple must have the same length."];Return[$Failed]];
+If[Npar=!=Length[msTuple],Print["momTuple and msTuple must have the same length."];Return[$Failed]];
+If[ptot=!=Total[momTuple],Print["The sum of momTuple must equal ptot."];Return[$Failed]];
 (* Extract the particle information and reorganize *)
 sTuple=ConstantArray[0,Npar];
 pTuple=ConstantArray[0,Npar];
