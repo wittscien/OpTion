@@ -11,12 +11,12 @@ Begin["`OneHadronOperator`"];
 
 (* 2024.9.14: Happy Moon Festival! Here I implement my way of building one-hadron operators *)
 OneHadronOperatorAll[ptot_,rep_,r_,MaxND_]:=Module[{group,JG,JD,J13,NJD,repparity,repO,P,PGD,opList,op},
+If[MaxND>2,Print["One-hadron operators with MaxND > 2 are not implemented."];Return[$Failed]];
 group=MomToGroup[ptot];
 opList={};
 Do[
 (* JD is useful for ND>=2 *)
 NJD=If[ND>=2,2,0];
-(* ND>=3 is not useful for now *)
 J13=0;
 Do[
 JG=If[TG==="S" || TG==="P",0,If[TG==="V" || TG==="A",1,-100]];

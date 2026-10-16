@@ -81,6 +81,7 @@ If[Head[par2]===List,{s2,p2}=par2,{s2,p2}=ParToSpinParity[par2]];
 repO=StringTake[rep,{1,-2}];
 repparity=If[StringPart[rep,-1]==="+",1,If[StringPart[rep,-1]==="-",-1,Print["wrong rep. parity"]]];
 If[repparity=!=(-1)^L parparity[p1] parparity[p2],Print["The choice of L does not match the parity of the representation."];Return[{}]];
+If[!MemberQ[Keys[subduction][[All,1]],L+s1+s2],Print["Subduction coefficients up to J = ",L+s1+s2," are not implemented. Use TwoHadronOperatorAll."];Return[$Failed]];
 momList=SortBy[Select[GenerateMomVectors[maxmom],Norm[ptot - #] <= maxmom &],Norm[#]^2 + Norm[ptot - #]^2 &];
 (* Search for all possible spins and momenta *)
 opList={};
@@ -106,6 +107,7 @@ Print/@opList;
 
 PrintTwoHadronOperatorPartialWaveAll[ptot_,rep_,r_,maxmom_,par1_,par2_,L_,printPython_]:=Module[{JLSList,opList,PythonList},
 opList=TwoHadronOperatorPartialWaveAll[ptot,rep,r,maxmom,par1,par2,L,True];
+If[opList===$Failed,Return[$Failed]];
 If[opList==={},Return[]];
 {JLSList,opList}=opList;
 If[printPython,

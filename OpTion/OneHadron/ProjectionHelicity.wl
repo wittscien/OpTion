@@ -47,6 +47,7 @@ Return[ope];
 
 (* Rest frame: Subsuperscript[O, \[CapitalLambda],\[Mu], [J]] *)
 OSub[rep_,r_,J_,JD_,J13_,TG_,ND_]:=Module[{ope,repparity,repO,P,PGD},
+If[ND>2,Print["One-hadron operators with ND > 2 are not implemented."];Return[$Failed]];
 repO=StringTake[rep,{1,-2}];
 repparity=If[StringPart[rep,-1]==="+",1,If[StringPart[rep,-1]==="-",-1,Print["wrong rep. parity"]]];
 P=If[TG==="S" || TG==="A",1,If[TG==="P" || TG==="V",-1,0]];
@@ -62,6 +63,7 @@ Return[ope];
 
 (* Moving frame: Subsuperscript[O, \[CapitalLambda],\[Mu], [J,|\[Lambda]|]] *)
 OSub[group_,rep_,r_,J_, \[Lambda]_,JD_,J13_,TG_,ND_]:=Module[{ope,P,\[Eta]tilde,PGD},
+If[ND>2,Print["One-hadron operators with ND > 2 are not implemented."];Return[$Failed]];
 If[!MemberQ[{"C4v","C2v","C3v"},group],Print["Helicity subduction is not implemented for ",group,". Use ProjectionOperator1 or OneHadronOperatorAll."];Return[$Failed]];
 If[J<Abs[\[Lambda]],Print["Wrong: J < \[Lambda]"];Return[0]];
 P=If[TG==="S" || TG==="A",1,If[TG==="P" || TG==="V",-1,0]];

@@ -8,6 +8,7 @@ Begin["`Projection`"];
 
 (* Projection method for hadron in any groups *)
 ProjectionOperator1[ptot_,rep_,r_,J_,M_,JD_,J13_,TG_,ND_]:=Module[{group,repO,repparity,P,PGD,ope,singleOpe},
+If[ND>2,Print["One-hadron operators with ND > 2 are not implemented."];Return[$Failed]];
 group=MomToGroup[ptot];
 (* Separate the parity of the rep. *)
 If[MemberQ[{"Oh","OhD"},group],

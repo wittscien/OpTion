@@ -1,6 +1,6 @@
 (* ::Package:: *)
 
-ProjectionOperatorN::usage = "ProjectionOperatorN[group,r,p,s1,ms1,p1,s2,ms2,p2] generates two-hadron operators by projection.";
+ProjectionOperatorN::usage = "ProjectionOperatorN[ptot,rep,r,momTuple,parTuple,msTuple] generates N-hadron operators by projection. parTuple contains {spin,parity} pairs.";
 
 
 Begin["`Projection`"];
