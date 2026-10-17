@@ -81,17 +81,18 @@ Return[SortBy[Select[Tuples[GenerateMomVectors[N],M],Total[#]===ptot &],Total[(N
 
 
 (* 2024.08.19: Check linear dependency *)
-IsLinearlyIndependent[exprList_,newExpr_]:=Module[{allMonomials,coeffMatrix,augmentedMatrix},
-If[Expand[newExpr]===0,Return[False]];
+IsLinearlyIndependent[exprList_,newExpr_]:=Module[{expressions,allMonomials,coeffMatrix,augmentedMatrix},
+(* Expand ordinary and noncommutative products before extracting coefficients. *)
+expressions=NonCommutativeMultiply`NCExpand/@Join[exprList,{newExpr}];
+If[Last[expressions]===0,Return[False]];
 (* MatrixRank refuses the empty matrix *)
 If[exprList==={},Return[True]];
 (* Extract all distinct monomials from exprList and newExpr *)
-allMonomials=Expand/@Join[exprList,{newExpr}];
-allMonomials=DeleteCases[Union[ONormalize/@Flatten[If[Head[#]===Plus,List@@#,{#}]&/@allMonomials,1]],0];
+allMonomials=DeleteCases[Union[ONormalize/@Flatten[If[Head[#]===Plus,List@@#,{#}]&/@expressions,1]],0];
 (* Compute the coefficient matrix for the list with respect to the monomials *)
-coeffMatrix=Table[Coefficient[expr,mon],{expr,exprList},{mon,allMonomials}];
+coeffMatrix=Table[Coefficient[expr,mon],{expr,Most[expressions]},{mon,allMonomials}];
 (* Compute the coefficients for the new expression with respect to the monomials *)
-augmentedMatrix=Append[coeffMatrix,Coefficient[newExpr,#]&/@allMonomials];
+augmentedMatrix=Append[coeffMatrix,Coefficient[Last[expressions],#]&/@allMonomials];
 (* Check if the new expression introduces a linear dependence *)
 Return[MatrixRank[augmentedMatrix]>MatrixRank[coeffMatrix]];
 ]
